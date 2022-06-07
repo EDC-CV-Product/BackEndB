@@ -29,52 +29,53 @@ urlpatterns = [
     path('users/',views.UserApiView.as_view(),name="User List(GET)"),
     # Filtering Registred Users By Using user id
     path('users/<int:users>',views.userdetailView.as_view(),name=' User Detailed'),
+
     #get All Applicant Document from DAtabase Table
-    path('Applicant_Document/',views.Applicant_DocumentApiView.as_view(),name="Applicant(GET)"),
+    path('Applicant_Documents/',views.Applicant_DocumentApiView.as_view(),name="Applicant(GET)"),
     #get Appliccant Document by using Certaim Parameter
-    path('Applicant_Document/<int:appid>',views.Applicant_DocumentdetailView.as_view(),name="Applicant Detail View"),
+    path('Applicant_Documents/<int:Applicant_Documents>',views.Applicant_DocumentdetailView.as_view(),name="Applicant Detail View"),
 
-    path('Application/',views.ApplicationApiView.as_view(),name="Application"),# to Get Whole Data From The Database Table
-    path('Application/<int:App>',views.ApplicationdetailView.as_view(),name="Application Detail View"),# to searrch by Spesfic Parameter
+    path('Applications/',views.ApplicationApiView.as_view(),name="Application"),# to Get Whole Data From The Database Table
+    path('Applications/<int:Applications>',views.ApplicationdetailView.as_view(),name="Application Detail View"),# to searrch by Spesfic Parameter
     
-    path('Job/',views.JobApiView.as_view(),name="Job"),
-    path('Job/<int:jobid>',views.jobdetailView.as_view(),name="Job Detail View"),
+    path('Jobs/',views.JobApiView.as_view(),name="Job"),
+    path('Jobs/<int:Jobs>',views.jobdetailView.as_view(),name="Job Detail View"),
 
-    path('User_Role/',views.UserRoleApiView.as_view(),name="User Role"),
-    path('User_Role/<int:urroleid>',views.userroledetailView.as_view(),name="User Role Detail View"),
-
-
-    path('Role/',views.RoleApiView.as_view(),name="Role"),
-    path('Role/<int:roo>',views.roledetailView.as_view(),name="Role Detail View"),
+    path('User_Roles/',views.UserRoleApiView.as_view(),name="User Role"),
+    path('User_Roles/<int:Roles>',views.userroledetailView.as_view(),name="User Role Detail View"),
 
 
-    path('Skill_Set/',views.SkillsetApiView.as_view(),name="Skill"),
-    path('Skill_Set/<int:roo>',views.skilldetailView.as_view(),name="Skill Detail View"),
-
-    path('job_platforms/',views.JobPlatformApiView.as_view(),name="Job Platform"),
-    path('job_platforms/<int:jobpalt>',views.jobplatdetailView.as_view(),name="Job Platforms Detail View"),
+    path('Roles/',views.RoleApiView.as_view(),name="Role"),
+    path('Roles/<int:roo>',views.roledetailView.as_view(),name="Role Detail View"),
 
 
-    path('Company/',views.CompanyApiView.as_view(),name="Company"),
-    path('Company/<int:compid>',views.CompanydetailView.as_view(),name="Company Detail View"),
+    path('Skill_Sets/',views.SkillsetApiView.as_view(),name="Skill"),
+    path('Skill_Sets/<int:Skill_Sets>',views.skilldetailView.as_view(),name="Skill Detail View"),
 
-    path('applicant_cv/',views.applicant_cvApiView.as_view(),name="Applicant Cv"),
-    path('applicant_cv/<int:compid>',views.Applicant_cvdetailView.as_view(),name="applicant Cv Detail View"),
+    path('job_platform/',views.JobPlatformApiView.as_view(),name="Job Platform"),
+    path('job_platform/<int:job_platform>',views.jobplatdetailView.as_view(),name="Job Platforms Detail View"),
 
-    path('Experience/',views.ExperianceApiView.as_view(),name="Experiance"),
-    path('Experience/<int:compid>',views.ExperiancedetailView.as_view(),name="Experiance Detail View"),
 
-    path('Education/',views.EducationApiView.as_view(),name="Education"),
-    path('Education/<int:compid>',views.EducationdetailView.as_view(),name="Education Detail View"),
+    path('Companys/',views.CompanyApiView.as_view(),name="Company"),
+    path('Companys/<int:Companys>',views.CompanydetailView.as_view(),name="Company Detail View"),
 
-    path('candidate_Evaluation/',views.Candidate_EvaluationApiView.as_view(),name="Candidate Evaluation"),
-    path('candidate_Evaluation/<int:compid>',views.CandidateEvaluationdetailView.as_view(),name="Candidate Evaluation Detail View"),
+    path('applicant_cvs/',views.applicant_cvApiView.as_view(),name="Applicant Cv"),
+    path('applicant_cvs/<int:applicant_cvs>',views.Applicant_cvdetailView.as_view(),name="applicant Cv Detail View"),
 
-    path('job_category/',views.JobCategoryApiView.as_view(),name="Job Category"),
-    path('job_category/<int:compid>',views.job_categorydetailView.as_view(),name="Job Category Detail View"),
+    path('Experiences/',views.ExperianceApiView.as_view(),name="Experiance"),
+    path('Experiences/<int:Experiences>',views.ExperiancedetailView.as_view(),name="Experiance Detail View"),
 
-    path('Job_dis/',views.Job_Description_DocumentApiView.as_view(),name="Job Category"),
-    path('job_dis/<int:compid>',views.JobDiscriptiondetailView.as_view(),name="Job Category Detail View"),
+    path('Educations/',views.EducationApiView.as_view(),name="Education"),
+    path('Educations/<int:Educations>',views.EducationdetailView.as_view(),name="Education Detail View"),
+
+    path('candidate_Evaluations/',views.Candidate_EvaluationApiView.as_view(),name="Candidate Evaluation"),
+    path('candidate_Evaluations/<int:candidate_Evaluations>',views.CandidateEvaluationdetailView.as_view(),name="Candidate Evaluation Detail View"),
+
+    path('job_categorys/',views.JobCategoryApiView.as_view(),name="Job Category"),
+    path('job_categorys/<int:job_categorys>',views.job_categorydetailView.as_view(),name="Job Category Detail View"),
+
+    path('Job_Description_Documents/',views.Job_Description_DocumentApiView.as_view(),name="Job Category"),
+    path('Job_Description_Documents/<int:Job_Description_Documents>',views.JobDiscriptiondetailView.as_view(),name="Job Category Detail View"),
 
 
     ]

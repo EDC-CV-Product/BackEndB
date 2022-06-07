@@ -56,8 +56,8 @@ class userdetailView(APIView):
 class UserRoleApiView(APIView):
     serializer_class=UserRoleSerializer
     def get(self,request):
-        User_Role=User_Role.objects.all().values()
-        return Response({"Message":"List of User roles","User Role List":User_Role})
+        User_Roles=User_Role.objects.all().values()
+        return Response({"Message":"List of User roles","User Role List":User_Roles})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -73,9 +73,9 @@ class UserRoleApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class userroledetailView(APIView):
     
-    def get(self,request,User_Role):
-        User_Role=User_Role.objects.filter(user_role_id=User_Role)
-        serializer_class=UserRoleSerializer(User_Role,many=True)
+    def get(self,request,User_Roles):
+        User_Roles=User_Role.objects.filter(user_role_id=User_Roles)
+        serializer_class=UserRoleSerializer(User_Roles,many=True)
         return Response(serializer_class.data)
 
 # API for  Role Starts Here
@@ -83,8 +83,8 @@ class userroledetailView(APIView):
 class RoleApiView(APIView):
     serializer_class=RoleSerializer
     def get(self,request):
-        Role=Role.objects.all().values()
-        return Response({"Message":"List of User roles"," Role List":Role})
+        Roles=Role.objects.all().values()
+        return Response({"Message":"List of User roles"," Role List":Roles})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -100,9 +100,9 @@ class RoleApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class roledetailView(APIView):
     
-    def get(self,request,roo):
-        Role=Role.objects.filter(role_id=roo)
-        serializer_class=RoleSerializer(Role,many=True)
+    def get(self,request,Roles):
+        Roles=Role.objects.filter(role_id=Roles)
+        serializer_class=RoleSerializer(Roles,many=True)
         return Response(serializer_class.data)
 
 # API for  Skill Set Starts Here
@@ -110,8 +110,8 @@ class roledetailView(APIView):
 class SkillsetApiView(APIView):
     serializer_class=SkillsetSerializer
     def get(self,request):
-        Skill_Set=Skill_Set.objects.all().values()
-        return Response({"Message":"List of User roles","User Role List":Skill_Set})
+        Skill_Sets=Skill_Set.objects.all().values()
+        return Response({"Message":"List of User roles","User Role List":Skill_Sets})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -127,9 +127,9 @@ class SkillsetApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class skilldetailView(APIView):
     
-    def get(self,request,skill_det):
-        Skill_Set=Skill_Set.objects.filter(skill_set_id=skill_det)
-        serializer_class=SkillsetSerializer(Skill_Set,many=True)
+    def get(self,request,Skill_Sets):
+        Skill_Sets=Skill_Set.objects.filter(skill_set_id=Skill_Sets)
+        serializer_class=SkillsetSerializer(Skill_Sets,many=True)
         return Response(serializer_class.data)
 
 # API for  Job Platform Starts Here
@@ -137,8 +137,8 @@ class skilldetailView(APIView):
 class JobPlatformApiView(APIView):
     serializer_class=jobplatformSerializer
     def get(self,request):
-        job_platforms=job_platforms.objects.all().values()
-        return Response({"Message":"List of Job Platforms","Job Platform List":job_platforms})
+        job_platform=job_platforms.objects.all().values()
+        return Response({"Message":"List of Job Platforms","Job Platform List":job_platform})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -154,9 +154,9 @@ class JobPlatformApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class jobplatdetailView(APIView):
     
-    def get(self,request,jobpalt):
-        Job_Plat=job_platforms.objects.filter(job_platform_id=jobpalt)
-        serializer_class=jobplatformSerializer(Job_Plat,many=True)
+    def get(self,request,job_platform):
+        job_platform=job_platforms.objects.filter(job_platform_id=job_platform)
+        serializer_class=jobplatformSerializer(job_platform,many=True)
         return Response(serializer_class.data)
 
 
@@ -165,8 +165,8 @@ class jobplatdetailView(APIView):
 class CompanyApiView(APIView):
     serializer_class=CompanySerializer
     def get(self,request):
-        Company=Company.objects.all().values()
-        return Response({"Message":"List of companey","companey List":Company})
+        Companys=Company.objects.all().values()
+        return Response({"Message":"List of companey","companey List":Companys})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -182,9 +182,9 @@ class CompanyApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class CompanydetailView(APIView):
     
-    def get(self,request,urid):
-        Company=Company.objects.filter(companey_id=urid)
-        serializer_class=CompanySerializer(Company,many=True)
+    def get(self,request,Companys):
+        Companys=Company.objects.filter(companey_id=Companys)
+        serializer_class=CompanySerializer(Companys,many=True)
         return Response(serializer_class.data)
 
 
@@ -193,8 +193,8 @@ class CompanydetailView(APIView):
 class applicant_cvApiView(APIView):
     serializer_class=Applicant_cvSerializer
     def get(self,request):
-        applicant_cv=applicant_cv.objects.all().values()
-        return Response({"Message":"List of applicant cv","applicant cv List":applicant_cv})
+        applicant_cvs=applicant_cv.objects.all().values()
+        return Response({"Message":"List of applicant cv","applicant cv List":applicant_cvs})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -210,9 +210,9 @@ class applicant_cvApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class Applicant_cvdetailView(APIView):
     
-    def get(self,request,urid):
-        applicant_cv=applicant_cv.objects.filter(applicant_id=urid)
-        serializer_class=Applicant_cvSerializer(applicant_cv,many=True)
+    def get(self,request,applicant_cvs):
+        applicant_cvs=applicant_cv.objects.filter(applicant_id=applicant_cvs)
+        serializer_class=Applicant_cvSerializer(applicant_cvs,many=True)
         return Response(serializer_class.data)
 
 
@@ -221,8 +221,8 @@ class Applicant_cvdetailView(APIView):
 class ExperianceApiView(APIView):
     serializer_class=ExperianceSerializer
     def get(self,request):
-        Experience=Experience.objects.all().values()
-        return Response({"Message":"List of Job Platforms","Job Platform List":Experience})
+        Experiences=Experience.objects.all().values()
+        return Response({"Message":"List of Job Platforms","Job Platform List":Experiences})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -238,9 +238,9 @@ class ExperianceApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class ExperiancedetailView(APIView):
     
-    def get(self,request,urid):
-        Experience=Experience.objects.filter(experiance_id=urid)
-        serializer_class=ExperianceSerializer(Experience,many=True)
+    def get(self,request,Experiences):
+        Experiences=Experience.objects.filter(experiance_id=Experiences)
+        serializer_class=ExperianceSerializer(Experiences,many=True)
         return Response(serializer_class.data)
 
 
@@ -249,8 +249,8 @@ class ExperiancedetailView(APIView):
 class EducationApiView(APIView):
     serializer_class=EducationSerializer
     def get(self,request):
-        Education=Education.objects.all().values()
-        return Response({"Message":"List of Job Platforms","Job Platform List":Education})
+        Educations=Education.objects.all().values()
+        return Response({"Message":"List of Job Platforms","Job Platform List":Educations})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -267,8 +267,8 @@ class EducationApiView(APIView):
 class EducationdetailView(APIView):
     
     def get(self,request,urid):
-        Education=Education.objects.filter(education_id=urid)
-        serializer_class=EducationSerializer(Education,many=True)
+        Educations=Education.objects.filter(education_id=Educations)
+        serializer_class=EducationSerializer(Educations,many=True)
         return Response(serializer_class.data)
 
 
@@ -277,8 +277,8 @@ class EducationdetailView(APIView):
 class JobApiView(APIView):
     serializer_class=JobSerializer
     def get(self,request):
-        Job=Job.objects.all().values()
-        return Response({"Message":"List of Job ","Job  List":Job})
+        Jobs=Job.objects.all().values()
+        return Response({"Message":"List of Job ","Job  List":Jobs})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -294,8 +294,8 @@ class JobApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class jobdetailView(APIView):
     
-    def get(self,request,jobid):
-        Job=Job.objects.filter(job_id=jobid)
+    def get(self,request,Jobs):
+        Jobs=Job.objects.filter(job_id=Jobs)
         serializer_class=JobSerializer(Job,many=True)
         return Response(serializer_class.data)
 
@@ -304,8 +304,8 @@ class jobdetailView(APIView):
 class JobCategoryApiView(APIView):
     serializer_class=JobcategorySerializer
     def get(self,request):
-        job_category=job_category.objects.all().values()
-        return Response({"Message":"List of job catagory ","Job category":job_category})
+        job_categorys=job_category.objects.all().values()
+        return Response({"Message":"List of job catagory ","Job category":job_categorys})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -321,9 +321,9 @@ class JobCategoryApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class job_categorydetailView(APIView):
     
-    def get(self,request,urid):
-        job_category=job_category.objects.filter(job_category_id=urid)
-        serializer_class=JobcategorySerializer(job_category,many=True)
+    def get(self,request,job_categorys):
+        job_categorys=job_category.objects.filter(job_category_id=job_categorys)
+        serializer_class=JobcategorySerializer(job_categorys,many=True)
         return Response(serializer_class.data)
 
 # API for  Application Starts Here
@@ -331,8 +331,8 @@ class job_categorydetailView(APIView):
 class ApplicationApiView(APIView):
     serializer_class=ApplicationSerializer
     def get(self,request):
-        Application=Application.objects.all().values()
-        return Response({"Message":"List of Application ","Application":Application})
+        Applications=Application.objects.all().values()
+        return Response({"Message":"List of Application ","Application":Applications})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -348,9 +348,9 @@ class ApplicationApiView(APIView):
 # API used to retrive User Detail Using UserId Only
 class ApplicationdetailView(APIView):
     
-    def get(self,request,App):
-        Application=Application.objects.filter(application_id=App)
-        serializer_class=ApplicationSerializer(Application,many=True)
+    def get(self,request,Applications):
+        Applications=Application.objects.filter(application_id=Applications)
+        serializer_class=ApplicationSerializer(Applications,many=True)
         return Response(serializer_class.data)
 
 # API for  Applicant_Document Starts Here
@@ -358,8 +358,8 @@ class ApplicationdetailView(APIView):
 class Applicant_DocumentApiView(APIView):
     serializer_class=ApplicatDocumentSerializer
     def get(self,request):
-        Applicant_Document=Applicant_Document.objects.all().values()
-        return Response({"Message":"List of Applicant_Document ","Applicant_Document":Applicant_Document})
+        Applicant_Documents=Applicant_Document.objects.all().values()
+        return Response({"Message":"List of Applicant_Document ","Applicant_Document":Applicant_Documents})
 
 # to Create Form and POST data to Table
 
@@ -376,9 +376,9 @@ class Applicant_DocumentApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class Applicant_DocumentdetailView(APIView):
     
-    def get(self,request,appid):
-        Applicant_Document=Applicant_Document.objects.filter(user_id=appid)
-        serializer_class=ApplicatDocumentSerializer(Applicant_Document,many=True)
+    def get(self,request,Applicant_Documents):
+        Applicant_Documents=Applicant_Document.objects.filter(user_id=Applicant_Documents)
+        serializer_class=ApplicatDocumentSerializer(Applicant_Documents,many=True)
         return Response(serializer_class.data)
 
 # API for  candidate_Evaluation Starts Here
@@ -386,8 +386,8 @@ class Applicant_DocumentdetailView(APIView):
 class Candidate_EvaluationApiView(APIView):
     serializer_class=candidate_EvaluationSerializer
     def get(self,request):
-        candidate_Evaluation=candidate_Evaluation.objects.all().values()
-        return Response({"Message":"List of Candidate_evaluation ","Candidate_evaluation":candidate_Evaluation})
+        candidate_Evaluations=candidate_Evaluation.objects.all().values()
+        return Response({"Message":"List of Candidate_evaluation ","Candidate_evaluation":candidate_Evaluations})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -403,9 +403,9 @@ class Candidate_EvaluationApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class CandidateEvaluationdetailView(APIView):
     
-    def get(self,request,urid):
-        candidate_Evaluation=candidate_Evaluation.objects.filter(candidate_evaluation_id=urid)
-        serializer_class=candidate_EvaluationSerializer(candidate_Evaluation,many=True)
+    def get(self,request,candidate_Evaluations):
+        candidate_Evaluations=candidate_Evaluation.objects.filter(candidate_evaluation_id=candidate_Evaluations)
+        serializer_class=candidate_EvaluationSerializer(candidate_Evaluations,many=True)
         return Response(serializer_class.data)
 
 # API for  Job_Description_Document Starts Here
@@ -413,8 +413,8 @@ class CandidateEvaluationdetailView(APIView):
 class Job_Description_DocumentApiView(APIView):
     serializer_class=jobDiscriptionSerializer
     def get(self,request):
-        Job_Description_Document=Job_Description_Document.objects.all().values()
-        return Response({"Message":"List of Job_Description_Document ","Job_Description_Document":Job_Description_Document})
+        Job_Description_Documents=Job_Description_Document.objects.all().values()
+        return Response({"Message":"List of Job_Description_Document ","Job_Description_Document":Job_Description_Documents})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -430,7 +430,7 @@ class Job_Description_DocumentApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class JobDiscriptiondetailView(APIView):
     
-    def get(self,request,urid):
-        Job_Description_Document=Job_Description_Document.objects.filter(job_description_id=urid)
-        serializer_class=jobDiscriptionSerializer(Job_Description_Document,many=True)
+    def get(self,request,Job_Description_Documents):
+        Job_Description_Documents=Job_Description_Document.objects.filter(job_description_id=Job_Description_Documents)
+        serializer_class=jobDiscriptionSerializer(Job_Description_Documents,many=True)
         return Response(serializer_class.data)
