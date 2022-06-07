@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-
+import django_heroku
+import django
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-8#rl$4_b)x@qyagec#hbs^y!xk3yr6ls=4j923=6rec&@_1qyo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cvapptrack.heroku.com']
 
 
 # Application definition
@@ -75,7 +77,7 @@ WSGI_APPLICATION = 'ATS_Project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ATS_Project',
@@ -85,6 +87,19 @@ DATABASES = {
         'PORT': 3306,
 
     }
+}
+"""
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dcb01ugdbrghr9',
+        'USER': 'wzfhypitqwopbw',
+        'PASSWORD': '4383f1d284caec84d3da17bbb5f9214163df02f673b2c23ff47616a5ce347136',
+        'HOST': 'ec2-52-72-99-110.compute-1.amazonaws.com',
+        'PORT': '5432',
+          }
 }
 
 
@@ -122,7 +137,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+#STATIC_URL = 'static/'
+
+
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_URL="/static/"
+django_heroku.settings(locals())
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
