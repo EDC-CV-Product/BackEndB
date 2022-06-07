@@ -26,9 +26,9 @@ from ATS_APP.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Get Registred Useres
-    path('user/',views.UserApiView.as_view(),name="User List(GET)"),
+    path('users/',views.UserApiView.as_view(),name="User List(GET)"),
     # Filtering Registred Users By Using user id
-    path('user/<int:uid>',views.userdetailView.as_view(),name=' User Detailed'),
+    path('users/<int:uid>',views.userdetailView.as_view(),name=' User Detailed'),
     #get All Applicant Document from DAtabase Table
     path('Applicant_Document/',views.Applicant_DocumentApiView.as_view(),name="Applicant(GET)"),
     #get Appliccant Document by using Certaim Parameter
