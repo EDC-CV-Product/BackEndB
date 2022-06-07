@@ -28,7 +28,7 @@ urlpatterns = [
     # Get Registred Useres
     path('users/',views.UserApiView.as_view(),name="User List(GET)"),
     # Filtering Registred Users By Using user id
-    path('users/<int:uid>',views.userdetailView.as_view(),name=' User Detailed'),
+    path('users/<int:users>',views.userdetailView.as_view(),name=' User Detailed'),
     #get All Applicant Document from DAtabase Table
     path('Applicant_Document/',views.Applicant_DocumentApiView.as_view(),name="Applicant(GET)"),
     #get Appliccant Document by using Certaim Parameter
