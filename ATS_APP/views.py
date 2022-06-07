@@ -46,7 +46,7 @@ class UserApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class userdetailView(APIView):
     
-    def get(self,request,uid):
+    def get(self,request,user):
         user=user.objects.filter(user_id=user)
         serializer_class=UserSerializer(user,many=True)
         return Response(serializer_class.data)
