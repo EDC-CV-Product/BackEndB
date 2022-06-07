@@ -87,8 +87,8 @@ WSGI_APPLICATION = 'ATS_Project.wsgi.application'
         'PORT': 3306,
 
     }
-}
-"""
+}"""
+
 
 
 DATABASES = {

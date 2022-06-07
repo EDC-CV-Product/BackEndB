@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 
 # Create your models here.
@@ -12,6 +13,9 @@ class user(models.Model):
     phone=models.CharField(max_length=20,default='')
     country=models.CharField(max_length=20,default='')
 
+class Meta:
+    model=user
+    feilds= '__all__'
 
 class User_Role(models.Model):
     user_role_id = models.AutoField(primary_key=True)
