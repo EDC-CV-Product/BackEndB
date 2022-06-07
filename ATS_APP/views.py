@@ -377,7 +377,7 @@ class Applicant_DocumentApiView(APIView):
 class Applicant_DocumentdetailView(APIView):
     
     def get(self,request,appid):
-        Appdoc=Applicant_Document.objects.filter(applicant_document_id=appid)
+        Appdoc=Applicant_Document.objects.filter(user_id=appid)
         serializer_class=ApplicatDocumentSerializer(Appdoc,many=True)
         return Response(serializer_class.data)
 
