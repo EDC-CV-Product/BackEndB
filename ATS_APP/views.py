@@ -16,10 +16,10 @@ class UserApiView(APIView):
     serializer_class=UserSerializer
     def get(self,request):
         #alluser is variable and user is table name
-        user=user.objects.all().values()
+        users=user.objects.all().values()
         # can also write in one of the following options
         #return Response(serializers.data)
-        return Response({"Message":"List of Users","User List":user})
+        return Response({"Message":"List of Users","User List":users})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -46,9 +46,9 @@ class UserApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class userdetailView(APIView):
     
-    def get(self,request,user):
-        user=user.objects.filter(user_id=user)
-        serializer_class=UserSerializer(user,many=True)
+    def get(self,request,users):
+        users=user.objects.filter(user_id=users)
+        serializer_class=UserSerializer(users,many=True)
         return Response(serializer_class.data)
 
 # API for User Role Starts Here
