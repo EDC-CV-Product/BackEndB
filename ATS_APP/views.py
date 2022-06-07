@@ -10,6 +10,9 @@ from rest_framework import status
 
 from .serializers import *
 
+from rest_framework import filters
+from rest_framework import generics
+
 
 # API that used to retun all Data In the Database Table
 class UserApiView(APIView):
@@ -380,6 +383,13 @@ class Applicant_DocumentdetailView(APIView):
         Applicant_Documents=Applicant_Document.objects.filter(user_id=Applicant_Documents)
         serializer_class=ApplicatDocumentSerializer(Applicant_Documents,many=True)
         return Response(serializer_class.data)
+
+
+class Applicant_DocumentdetailView(generics.ListCreateAPIView):
+    search_fields = ['user_id']
+    filter_backends = (filters.SearchFilter,)
+    queryset = Applicant_Document.objects.all()
+    serializer_class = ApplicatDocumentSerializer
 
 # API for  candidate_Evaluation Starts Here
 
