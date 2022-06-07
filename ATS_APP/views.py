@@ -47,7 +47,7 @@ class UserApiView(APIView):
 class userdetailView(APIView):
     
     def get(self,request,uid):
-        user=user.objects.filter(user_id=uid)
+        user=user.objects.filter(user_id=user)
         serializer_class=UserSerializer(user,many=True)
         return Response(serializer_class.data)
 
@@ -73,8 +73,8 @@ class UserRoleApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class userroledetailView(APIView):
     
-    def get(self,request,urroleid):
-        User_Role=User_Role.objects.filter(user_role_id=urroleid)
+    def get(self,request,User_Role):
+        User_Role=User_Role.objects.filter(user_role_id=User_Role)
         serializer_class=UserRoleSerializer(User_Role,many=True)
         return Response(serializer_class.data)
 
