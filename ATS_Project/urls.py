@@ -42,11 +42,11 @@ urlpatterns = [
     path('Jobs/<int:Jobs>',views.jobdetailView.as_view(),name="Job Detail View"),
 
     path('User_Roles/',views.UserRoleApiView.as_view(),name="User Role"),
-    path('User_Roles/<int:Roles>',views.userroledetailView.as_view(),name="User Role Detail View"),
+    path('User_Roles/<int:User_Roles>',views.userroledetailView.as_view(),name="User Role Detail View"),
 
 
     path('Roles/',views.RoleApiView.as_view(),name="Role"),
-    path('Roles/<int:roo>',views.roledetailView.as_view(),name="Role Detail View"),
+    path('Roles/<int:Roles>',views.roledetailView.as_view(),name="Role Detail View"),
 
 
     path('Skill_Sets/',views.SkillsetApiView.as_view(),name="Skill"),
