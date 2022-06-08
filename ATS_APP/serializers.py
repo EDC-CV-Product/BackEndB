@@ -268,7 +268,7 @@ class ApplicatDocumentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Applicant_Document
-        fields = ('applicant_document_id','name','document','url','last_updated','user')
+        #fields = ('applicant_document_id','name','document','url','last_updated','user')
         fields='__all__'
 
 
