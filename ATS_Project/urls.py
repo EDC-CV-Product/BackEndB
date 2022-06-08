@@ -33,7 +33,7 @@ urlpatterns = [
     #get All Applicant Document from DAtabase Table
     path('Applicant_Documents/',views.Applicant_DocumentApiView.as_view(),name="Applicant(GET)"),
     #get Appliccant Document by using Certaim Parameter
-    path('Applicant_Documents/',views.Applicant_DocumentdetailView.as_view(),name="Applicant Detail View"),
+    path('Applicant_Documents/<int:user_id>',views.Applicant_DocumentdetailView.as_view(),name="Applicant Detail View"),
 
     path('Applications/',views.ApplicationApiView.as_view(),name="Application"),# to Get Whole Data From The Database Table
     path('Applications/<int:Applications>',views.ApplicationdetailView.as_view(),name="Application Detail View"),# to searrch by Spesfic Parameter
