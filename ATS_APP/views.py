@@ -377,22 +377,22 @@ class Applicant_DocumentApiView(APIView):
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
 # API used to retrive User Detail Using User Id Only
-"""class Applicant_DocumentdetailView(generics.ListCreateAPIView):
+class Applicant_DocumentdetailView(generics.ListCreateAPIView):
     
     def get(self,request,Applicant_Documents):
-        Applicant_Documents=Applicant_Document.objects.filter(user_id=Applicant_Documents)
+        Applicant_Documents=Applicant_Document.objects.filter(user_id=Applicant_Document.user_id)
         serializer_class=ApplicatDocumentSerializer(Applicant_Documents,many=True)
         search_fields = ['user_id']
-        filter_backends = (filters.SearchFilter,search_fields)
-        return Response(serializer_class.data)"""
+        filter_backends = (filters.SearchFilter,)
+        return Response(serializer_class.data)
 
 
-
+"""
 class Applicant_DocumentdetailView(generics.ListCreateAPIView):
     search_fields = ['user_id']
     filter_backends = (filters.SearchFilter,)
-    queryset = Applicant_Document.objects.filter(user_id=Applicant_Document.applicant_document_id)
-    serializer_class = ApplicatDocumentSerializer
+    queryset = Applicant_Document.objects.all()
+    serializer_class = ApplicatDocumentSerializer"""
 
 # API for  candidate_Evaluation Starts Here
 
