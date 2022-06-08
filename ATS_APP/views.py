@@ -386,6 +386,14 @@ class Applicant_DocumentdetailView(generics.ListCreateAPIView):
         filter_backends = (filters.SearchFilter,)
         return Response(serializer_class.data)
 
+
+    def getbyuser_id(self,x):
+        Applicant_Documents=Applicant_Document.objects.filter(user_id=x)
+        serializer_class=ApplicatDocumentSerializer(Applicant_Documents,many=True)
+        #search_fields = ['user_id']
+        #filter_backends = (filters.SearchFilter,)
+        return Response(serializer_class.data)
+
 # API for  candidate_Evaluation Starts Here
 
 class Candidate_EvaluationApiView(APIView):
