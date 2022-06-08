@@ -380,7 +380,7 @@ class Applicant_DocumentApiView(APIView):
 class Applicant_DocumentdetailView(generics.ListCreateAPIView):
     
     def get(self,request,Applicant_Documents):
-        Applicant_Documents=Applicant_Document.objects.filter(user_id=Applicant_Document.user_id)
+        Applicant_Documents=Applicant_Document.objects.filter(user_id=Applicant_Documents)
         serializer_class=ApplicatDocumentSerializer(Applicant_Documents,many=True)
         search_fields = ['user_id']
         filter_backends = (filters.SearchFilter,)
