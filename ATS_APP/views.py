@@ -380,18 +380,10 @@ class Applicant_DocumentApiView(APIView):
 class Applicant_DocumentdetailView(generics.ListCreateAPIView):
     
     def get(self,request,Applicant_Documents):
-        Applicant_Documents=Applicant_Document.objects.filter(user_id=Applicant_Documents)
+        Applicant_Documents=Applicant_Document.objects.filter(user_id=1)
         serializer_class=ApplicatDocumentSerializer(Applicant_Documents,many=True)
         search_fields = ['user_id']
         filter_backends = (filters.SearchFilter,)
-        return Response(serializer_class.data)
-
-
-    def getbyuser_id(self,x):
-        Applicant_Documents=Applicant_Document.objects.filter(user_id=x)
-        serializer_class=ApplicatDocumentSerializer(Applicant_Documents,many=True)
-        #search_fields = ['user_id']
-        #filter_backends = (filters.SearchFilter,)
         return Response(serializer_class.data)
 
 # API for  candidate_Evaluation Starts Here
