@@ -383,7 +383,7 @@ class Applicant_DocumentdetailView(generics.ListCreateAPIView):
         Applicant_Documents=Applicant_Document.objects.filter(user_id=Applicant_Documents)
         serializer_class=ApplicatDocumentSerializer(Applicant_Documents,many=True)
         search_fields = ['user_id']
-        filter_backends = (filters.SearchFilter,)
+        filter_backends = (filters.SearchFilter,search_fields)
         return Response(serializer_class.data)
 
 # API for  candidate_Evaluation Starts Here
