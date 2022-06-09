@@ -70,7 +70,7 @@ urlpatterns = [
     path('Applications/',views.ApplicationApiView.as_view(),name="Application"),# to Get Whole Data From The Database Table
     path('Applications/<int:Applications>',views.ApplicationdetailView.as_view(),name="Application Detail View"),# to searrch by Spesfic Parameter
     #to Return Applications using User_iD
-    path('Applications/get_application_by_user_id',get_application_by_id,name="Application Detail Detail by User_ID"),
+    path('Applications/get_application_by_user_id',get_application_by_user_id,name="Application Detail Detail by User_ID"),
 
     #get All Applicant Document from DAtabase Table
     path('Applicant_Documents/',views.Applicant_DocumentApiView.as_view(),name="Applicant(GET)"),
