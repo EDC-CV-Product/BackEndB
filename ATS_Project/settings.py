@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ATS_APP',
     'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -87,8 +88,8 @@ WSGI_APPLICATION = 'ATS_Project.wsgi.application'
         'PORT': 3306,
 
     }
-}"""
-
+}
+"""
 
 
 DATABASES = {

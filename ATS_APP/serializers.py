@@ -22,8 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
 class userdetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = user
-        fields = ('user_id','first_name', 'middle_name','last_name','email','password','city','phone','Country')
-        field='__all__'
+        fields='__all__'
 
 # User Role Serializer Starts Here
 
@@ -259,16 +258,15 @@ class ApplicatDocumentSerializer(serializers.ModelSerializer):
 
     class Meta: 
         model =Applicant_Document
-        fields='__all__'
+        fields='__all__' 
   
 
    
 class ApplicatDocumentSerializer(serializers.ModelSerializer):
     #tag = ApplicatDocumentSerializer()
-
+    ## user = UserSerializer(many=True, read_only=True)
     class Meta:
         model = Applicant_Document
-        #fields = ('applicant_document_id','name','document','url','last_updated','user')
         fields='__all__'
 
 

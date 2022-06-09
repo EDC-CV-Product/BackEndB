@@ -9,6 +9,7 @@ from .models import *
 from rest_framework import status
 
 from .serializers import *
+from django_filters import rest_framework as filters
 
 from rest_framework import filters
 from rest_framework import generics
@@ -18,11 +19,8 @@ from rest_framework import generics
 class UserApiView(APIView):
     serializer_class=UserSerializer
     def get(self,request):
-        #alluser is variable and user is table name
         users=user.objects.all().values()
-        # can also write in one of the following options
-        #return Response(serializers.data)
-        return Response({"Message":"List of Users","User List":users})
+        return Response({"Message":"List of Users","Users List":users})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -35,17 +33,6 @@ class UserApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
-    def put(self, request):
-        queryset = user.objects.get(user_id=request.data['user_id'])
-        serializer = UserSerializer(queryset, data= request.data)
-        try:
-            if serializer.is_valid():
-                serializer.save()
-                return Response(data=serializer.data, status=status.HTTP_200_OK)
-        except Exception as e:
-            print(e)
-            return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
-
 # API used to retrive User Detail Using User Id Only
 class userdetailView(APIView):
     
@@ -53,6 +40,17 @@ class userdetailView(APIView):
         users=user.objects.filter(user_id=users)
         serializer_class=UserSerializer(users,many=True)
         return Response(serializer_class.data)
+
+# Searching or Filtering paramater with URL query String search
+@api_view(['GET'])
+def get_user_by_email(request):
+        queryset = user.objects.all()
+        email = request.query_params.get('email', None)
+        if email is not None:
+            print('go it')
+            queryset = queryset.filter(email=email)
+        serializer = UserSerializer(queryset, many=True)
+        return Response({'data': serializer.data})
 
 # API for User Role Starts Here
 
@@ -269,7 +267,7 @@ class EducationApiView(APIView):
 # API used to retrive User Detail Using User Id Only
 class EducationdetailView(APIView):
     
-    def get(self,request,urid):
+    def get(self,request,Educations):
         Educations=Education.objects.filter(education_id=Educations)
         serializer_class=EducationSerializer(Educations,many=True)
         return Response(serializer_class.data)
@@ -299,8 +297,18 @@ class jobdetailView(APIView):
     
     def get(self,request,Jobs):
         Jobs=Job.objects.filter(job_id=Jobs)
-        serializer_class=JobSerializer(Job,many=True)
+        serializer_class=JobSerializer(Jobs,many=True)
         return Response(serializer_class.data)
+
+@api_view(['GET'])
+def get_jobs_by_job_position(request):
+        queryset = Job.objects.all()
+        job_position = request.query_params.get('job_position', None)
+        if job_position is not None:
+            print('go it')
+            queryset = queryset.filter(job_position=job_position)
+        serializer = JobSerializer(queryset, many=True)
+        return Response({'data': serializer.data})
 
 # API for  job_category Starts Here
 
@@ -356,6 +364,16 @@ class ApplicationdetailView(APIView):
         serializer_class=ApplicationSerializer(Applications,many=True)
         return Response(serializer_class.data)
 
+@api_view(['GET'])
+def get_application_by_user_id(request):
+        queryset = Application.objects.all()
+        user_id = request.query_params.get('user_id', None)
+        if user_id is not None:
+            print('go it')
+            queryset = queryset.filter(user_id=user_id)
+        serializer = ApplicationSerializer(queryset, many=True)
+        return Response({'data': serializer.data})
+
 # API for  Applicant_Document Starts Here
 
 class Applicant_DocumentApiView(APIView):
@@ -377,17 +395,24 @@ class Applicant_DocumentApiView(APIView):
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
 # API used to retrive User Detail Using User Id Only
-class Applicant_DocumentdetailView(generics.ListCreateAPIView):
-    
+
+class Applicant_DocumentdetailView(generics.ListAPIView):
     def get(self,request,Applicant_Documents):
-        Applicant_Documents=Applicant_Document.objects.filter(user_id=1)
+        Applicant_Documents=Applicant_Document.objects.filter(applicant_document_id=Applicant_Documents)
         serializer_class=ApplicatDocumentSerializer(Applicant_Documents,many=True)
-        search_fields = ['user_id']
-        filter_backends = (filters.SearchFilter,)
         return Response(serializer_class.data)
 
+@api_view(['GET'])
+def usered(request):
+        queryset = Applicant_Document.objects.all()
+        user_id = request.query_params.get('user_id', None)
+        if user_id is not None:
+            print('go it')
+            queryset = queryset.filter(user_id=user_id)
+        serializer = ApplicatDocumentSerializer(queryset, many=True)
+        return Response({'data': serializer.data})
+       
 # API for  candidate_Evaluation Starts Here
-
 class Candidate_EvaluationApiView(APIView):
     serializer_class=candidate_EvaluationSerializer
     def get(self,request):
@@ -412,6 +437,16 @@ class CandidateEvaluationdetailView(APIView):
         candidate_Evaluations=candidate_Evaluation.objects.filter(candidate_evaluation_id=candidate_Evaluations)
         serializer_class=candidate_EvaluationSerializer(candidate_Evaluations,many=True)
         return Response(serializer_class.data)
+# to search Candidate evaluation using Job ID
+@api_view(['GET'])
+def get_candidate_by_job_id(request):
+        queryset = candidate_Evaluation.objects.all()
+        job_id = request.query_params.get('job_id', None)
+        if job_id is not None:
+            print('go it')
+            queryset = queryset.filter(job_id=job_id)
+        serializer = candidate_EvaluationSerializer(queryset, many=True)
+        return Response({'data': serializer.data})
 
 # API for  Job_Description_Document Starts Here
 
