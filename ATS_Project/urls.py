@@ -29,7 +29,7 @@ urlpatterns = [
     path('users/',views.UserApiView.as_view(),name="Applicant(GET)"),
     path('users/<int:users>',views.userdetailView.as_view(),name="User search by thier DI"),
     #Url for search query paramter string in the URL
-    path('users/get_user_by_email',get_user_by_email,name="User Detail by Email"),
+    path('users/by_email',get_user_by_email,name="User Detail Using Email"),
 
     path('User_Roles/',views.UserRoleApiView.as_view(),name="User Role"),
     path('User_Roles/<int:User_Roles>',views.userroledetailView.as_view(),name="User Role Detail View"),
@@ -70,7 +70,7 @@ urlpatterns = [
     path('Applications/',views.ApplicationApiView.as_view(),name="Application"),# to Get Whole Data From The Database Table
     path('Applications/<int:Applications>',views.ApplicationdetailView.as_view(),name="Application Detail View"),# to searrch by Spesfic Parameter
     #to Return Applications using User_iD
-    path('Applications/get_application_by_user_id',get_application_by_user_id,name="Application Detail Detail by User_ID"),
+    path('Applications/get_application_by_user_id',get_application_by_id,name="Application Detail Detail by User_ID"),
 
     #get All Applicant Document from DAtabase Table
     path('Applicant_Documents/',views.Applicant_DocumentApiView.as_view(),name="Applicant(GET)"),

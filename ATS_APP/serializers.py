@@ -50,7 +50,7 @@ class RoleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Role
-        fields = ('role_id','name')
+        fields = '__all__'
 
 #  Skill Set Starts Here
 
@@ -68,7 +68,7 @@ class SkillsetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Skill_Set
-        fields = ('skill','skill_level','applicant_cv')
+        fields='__all__'
 
 # Job Platform Starts Here
 
@@ -85,7 +85,7 @@ class jobplatformSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = job_platforms
-        fields = ('code','name','description')
+        fields='__all__'
 
 #  Company Starts Here
 
@@ -103,7 +103,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Company
-        fields = ('code','name','description')
+        fields='__all__'
 
 #  applicant_cv Starts Here
 
@@ -151,7 +151,7 @@ class ExperianceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Experience
-        fields = ('organization','title','begin_date','end_date','applicant_cv')
+        fields='__all__'
         
 
 #  Education Starts Here
@@ -173,7 +173,7 @@ class EducationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Education
-        fields = ('institution_name','degree_obtained','date_attended_from','date_attended_to','applicant_cv')
+        fields='__all__'
 
 
 # Job Starts Here
@@ -198,7 +198,7 @@ class JobSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Job
-        fields = ('description','date_published','job_deadline','number_of_vacancies','job_category','job_position','job_platform','organization_name','file')
+        fields='__all__'
 
 
 # JobCategory Starts Here
@@ -221,7 +221,7 @@ class JobcategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = job_category
-        fields = ('code','name','description')
+        fields='__all__'
 
 
 # Application Starts Here
@@ -291,7 +291,7 @@ class candidate_EvaluationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = candidate_Evaluation
-        fields = ('evaluation_notes','job','applicant','evaluation_result')
+        fields='__all__'
 
 
 # Job_Discription Starts Here
@@ -312,7 +312,7 @@ class jobDiscriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Job_Description_Document
-        fields = ('name','document','last_updated','job')
+        fields='__all__'
 
 
 

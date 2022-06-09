@@ -37,7 +37,7 @@ class UserApiView(APIView):
 class userdetailView(APIView):
     
     def get(self,request,users):
-        users=user.objects.filter(user_id=users)
+        users=user.objects.filter(id=users)
         serializer_class=UserSerializer(users,many=True)
         return Response(serializer_class.data)
 
@@ -365,12 +365,12 @@ class ApplicationdetailView(APIView):
         return Response(serializer_class.data)
 
 @api_view(['GET'])
-def get_application_by_user_id(request):
+def get_application_by_id(request):
         queryset = Application.objects.all()
-        user_id = request.query_params.get('user_id', None)
-        if user_id is not None:
+        id = request.query_params.get('id', None)
+        if id is not None:
             print('go it')
-            queryset = queryset.filter(user_id=user_id)
+            queryset = queryset.filter(id=id)
         serializer = ApplicationSerializer(queryset, many=True)
         return Response({'data': serializer.data})
 
@@ -405,10 +405,10 @@ class Applicant_DocumentdetailView(generics.ListAPIView):
 @api_view(['GET'])
 def usered(request):
         queryset = Applicant_Document.objects.all()
-        user_id = request.query_params.get('user_id', None)
-        if user_id is not None:
+        id = request.query_params.get('id', None)
+        if id is not None:
             print('go it')
-            queryset = queryset.filter(user_id=user_id)
+            queryset = queryset.filter(id=id)
         serializer = ApplicatDocumentSerializer(queryset, many=True)
         return Response({'data': serializer.data})
        
