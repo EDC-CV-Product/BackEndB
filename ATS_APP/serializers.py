@@ -180,6 +180,7 @@ class EducationSerializer(serializers.ModelSerializer):
 
 class JobSerializer(serializers.ModelSerializer):
     description = serializers.CharField(label="description:")
+    code=serializers.CharField(label="Code")
     date_published=serializers.DateTimeField(label="date_published:")
     job_deadline=serializers.DateTimeField(label="job_deadline:")
     number_of_vacancies = serializers.CharField(label="number_of_vacancies:")
@@ -194,8 +195,6 @@ class JobSerializer(serializers.ModelSerializer):
         fields='__all__'
    
 class JobSerializer(serializers.ModelSerializer):
-
-
     class Meta:
         model = Job
         fields='__all__'
