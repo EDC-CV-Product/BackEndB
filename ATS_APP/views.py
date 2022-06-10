@@ -13,16 +13,21 @@ from django_filters import rest_framework as filters
 
 from rest_framework import filters
 from rest_framework import generics
+from ATS_Project import settings
+import os
+from .resume_scan import *
+from .utils import *
 
 
 # API that used to retun all Data In the Database Table
 class UserApiView(APIView):
-    serializer_class=UserSerializer
-    def get(self,request):
-        users=user.objects.all().values()
-        return Response({"Message":"List of Users","Users List":users})
+    serializer_class = UserSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        users = user.objects.all().values()
+        return Response({"Message": "List of Users", "Users List": users})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = UserSerializer(data=request.data)
         try:
@@ -33,34 +38,38 @@ class UserApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class userdetailView(APIView):
-    
-    def get(self,request,users):
-        users=user.objects.filter(id=users)
-        serializer_class=UserSerializer(users,many=True)
+
+    def get(self, request, users):
+        users = user.objects.filter(id=users)
+        serializer_class = UserSerializer(users, many=True)
         return Response(serializer_class.data)
+
 
 # Searching or Filtering paramater with URL query String search
 @api_view(['GET'])
 def get_user_by_email(request):
-        queryset = user.objects.all()
-        email = request.query_params.get('email', None)
-        if email is not None:
-            print('go it')
-            queryset = queryset.filter(email=email)
-        serializer = UserSerializer(queryset, many=True)
-        return Response({'data': serializer.data})
+    queryset = user.objects.all()
+    email = request.query_params.get('email', None)
+    if email is not None:
+        print('go it')
+        queryset = queryset.filter(email=email)
+    serializer = UserSerializer(queryset, many=True)
+    return Response({'data': serializer.data})
+
 
 # API for User Role Starts Here
 
 class UserRoleApiView(APIView):
-    serializer_class=UserRoleSerializer
-    def get(self,request):
-        User_Roles=User_Role.objects.all().values()
-        return Response({"Message":"List of User roles","User Role List":User_Roles})
+    serializer_class = UserRoleSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        User_Roles = User_Role.objects.all().values()
+        return Response({"Message": "List of User roles", "User Role List": User_Roles})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = UserRoleSerializer(data=request.data)
         try:
@@ -71,23 +80,26 @@ class UserRoleApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class userroledetailView(APIView):
-    
-    def get(self,request,User_Roles):
-        User_Roles=User_Role.objects.filter(user_role_id=User_Roles)
-        serializer_class=UserRoleSerializer(User_Roles,many=True)
+
+    def get(self, request, User_Roles):
+        User_Roles = User_Role.objects.filter(user_role_id=User_Roles)
+        serializer_class = UserRoleSerializer(User_Roles, many=True)
         return Response(serializer_class.data)
+
 
 # API for  Role Starts Here
 
 class RoleApiView(APIView):
-    serializer_class=RoleSerializer
-    def get(self,request):
-        Roles=Role.objects.all().values()
-        return Response({"Message":"List of User roles"," Role List":Roles})
+    serializer_class = RoleSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        Roles = Role.objects.all().values()
+        return Response({"Message": "List of User roles", " Role List": Roles})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = RoleSerializer(data=request.data)
         try:
@@ -98,23 +110,26 @@ class RoleApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class roledetailView(APIView):
-    
-    def get(self,request,Roles):
-        Roles=Role.objects.filter(role_id=Roles)
-        serializer_class=RoleSerializer(Roles,many=True)
+
+    def get(self, request, Roles):
+        Roles = Role.objects.filter(role_id=Roles)
+        serializer_class = RoleSerializer(Roles, many=True)
         return Response(serializer_class.data)
+
 
 # API for  Skill Set Starts Here
 
 class SkillsetApiView(APIView):
-    serializer_class=SkillsetSerializer
-    def get(self,request):
-        Skill_Sets=Skill_Set.objects.all().values()
-        return Response({"Message":"List of User roles","User Role List":Skill_Sets})
+    serializer_class = SkillsetSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        Skill_Sets = Skill_Set.objects.all().values()
+        return Response({"Message": "List of User roles", "User Role List": Skill_Sets})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = SkillsetSerializer(data=request.data)
         try:
@@ -125,23 +140,26 @@ class SkillsetApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class skilldetailView(APIView):
-    
-    def get(self,request,Skill_Sets):
-        Skill_Sets=Skill_Set.objects.filter(skill_set_id=Skill_Sets)
-        serializer_class=SkillsetSerializer(Skill_Sets,many=True)
+
+    def get(self, request, Skill_Sets):
+        Skill_Sets = Skill_Set.objects.filter(skill_set_id=Skill_Sets)
+        serializer_class = SkillsetSerializer(Skill_Sets, many=True)
         return Response(serializer_class.data)
+
 
 # API for  Job Platform Starts Here
 
 class JobPlatformApiView(APIView):
-    serializer_class=jobplatformSerializer
-    def get(self,request):
-        job_platform=job_platforms.objects.all().values()
-        return Response({"Message":"List of Job Platforms","Job Platform List":job_platform})
+    serializer_class = jobplatformSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        job_platform = job_platforms.objects.all().values()
+        return Response({"Message": "List of Job Platforms", "Job Platform List": job_platform})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = jobplatformSerializer(data=request.data)
         try:
@@ -152,24 +170,26 @@ class JobPlatformApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class jobplatdetailView(APIView):
-    
-    def get(self,request,job_platform):
-        job_platform=job_platforms.objects.filter(job_platform_id=job_platform)
-        serializer_class=jobplatformSerializer(job_platform,many=True)
+
+    def get(self, request, job_platform):
+        job_platform = job_platforms.objects.filter(job_platform_id=job_platform)
+        serializer_class = jobplatformSerializer(job_platform, many=True)
         return Response(serializer_class.data)
 
 
 # API for  Companey Starts Here
 
 class CompanyApiView(APIView):
-    serializer_class=CompanySerializer
-    def get(self,request):
-        Companys=Company.objects.all().values()
-        return Response({"Message":"List of companey","companey List":Companys})
+    serializer_class = CompanySerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        Companys = Company.objects.all().values()
+        return Response({"Message": "List of companey", "companey List": Companys})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = CompanySerializer(data=request.data)
         try:
@@ -180,24 +200,26 @@ class CompanyApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class CompanydetailView(APIView):
-    
-    def get(self,request,Companys):
-        Companys=Company.objects.filter(companey_id=Companys)
-        serializer_class=CompanySerializer(Companys,many=True)
+
+    def get(self, request, Companys):
+        Companys = Company.objects.filter(companey_id=Companys)
+        serializer_class = CompanySerializer(Companys, many=True)
         return Response(serializer_class.data)
 
 
 # API for  applicant_cv Starts Here
 
 class applicant_cvApiView(APIView):
-    serializer_class=Applicant_cvSerializer
-    def get(self,request):
-        applicant_cvs=applicant_cv.objects.all().values()
-        return Response({"Message":"List of applicant cv","applicant cv List":applicant_cvs})
+    serializer_class = Applicant_cvSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        applicant_cvs = applicant_cv.objects.all().values()
+        return Response({"Message": "List of applicant cv", "applicant cv List": applicant_cvs})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = Applicant_cvSerializer(data=request.data)
         try:
@@ -208,24 +230,26 @@ class applicant_cvApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class Applicant_cvdetailView(APIView):
-    
-    def get(self,request,applicant_cvs):
-        applicant_cvs=applicant_cv.objects.filter(applicant_id=applicant_cvs)
-        serializer_class=Applicant_cvSerializer(applicant_cvs,many=True)
+
+    def get(self, request, applicant_cvs):
+        applicant_cvs = applicant_cv.objects.filter(applicant_id=applicant_cvs)
+        serializer_class = Applicant_cvSerializer(applicant_cvs, many=True)
         return Response(serializer_class.data)
 
 
 # API for  Experiance Starts Here
 
 class ExperianceApiView(APIView):
-    serializer_class=ExperianceSerializer
-    def get(self,request):
-        Experiences=Experience.objects.all().values()
-        return Response({"Message":"List of Job Platforms","Job Platform List":Experiences})
+    serializer_class = ExperianceSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        Experiences = Experience.objects.all().values()
+        return Response({"Message": "List of Job Platforms", "Job Platform List": Experiences})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = ExperianceSerializer(data=request.data)
         try:
@@ -236,24 +260,26 @@ class ExperianceApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class ExperiancedetailView(APIView):
-    
-    def get(self,request,Experiences):
-        Experiences=Experience.objects.filter(experiance_id=Experiences)
-        serializer_class=ExperianceSerializer(Experiences,many=True)
+
+    def get(self, request, Experiences):
+        Experiences = Experience.objects.filter(experiance_id=Experiences)
+        serializer_class = ExperianceSerializer(Experiences, many=True)
         return Response(serializer_class.data)
 
 
 # API for  Education Starts Here
 
 class EducationApiView(APIView):
-    serializer_class=EducationSerializer
-    def get(self,request):
-        Educations=Education.objects.all().values()
-        return Response({"Message":"List of Job Platforms","Job Platform List":Educations})
+    serializer_class = EducationSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        Educations = Education.objects.all().values()
+        return Response({"Message": "List of Job Platforms", "Job Platform List": Educations})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = EducationSerializer(data=request.data)
         try:
@@ -264,24 +290,26 @@ class EducationApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class EducationdetailView(APIView):
-    
-    def get(self,request,Educations):
-        Educations=Education.objects.filter(education_id=Educations)
-        serializer_class=EducationSerializer(Educations,many=True)
+
+    def get(self, request, Educations):
+        Educations = Education.objects.filter(education_id=Educations)
+        serializer_class = EducationSerializer(Educations, many=True)
         return Response(serializer_class.data)
 
 
 # API for  Job Starts Here
 
 class JobApiView(APIView):
-    serializer_class=JobSerializer
-    def get(self,request):
-        Jobs=Job.objects.all().values()
-        return Response({"Message":"List of Job ","Job  List":Jobs})
+    serializer_class = JobSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        Jobs = Job.objects.all().values()
+        return Response({"Message": "List of Job ", "Job  List": Jobs})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = JobSerializer(data=request.data)
         try:
@@ -292,33 +320,37 @@ class JobApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class jobdetailView(APIView):
-    
-    def get(self,request,Jobs):
-        Jobs=Job.objects.filter(job_id=Jobs)
-        serializer_class=JobSerializer(Jobs,many=True)
+
+    def get(self, request, Jobs):
+        Jobs = Job.objects.filter(job_id=Jobs)
+        serializer_class = JobSerializer(Jobs, many=True)
         return Response(serializer_class.data)
+
 
 @api_view(['GET'])
 def get_jobs_by_job_position(request):
-        queryset = Job.objects.all()
-        job_position = request.query_params.get('job_position', None)
-        if job_position is not None:
-            print('go it')
-            queryset = queryset.filter(job_position=job_position)
-        serializer = JobSerializer(queryset, many=True)
-        return Response({'data': serializer.data})
+    queryset = Job.objects.all()
+    job_position = request.query_params.get('job_position', None)
+    if job_position is not None:
+        print('go it')
+        queryset = queryset.filter(job_position=job_position)
+    serializer = JobSerializer(queryset, many=True)
+    return Response({'data': serializer.data})
+
 
 # API for  job_category Starts Here
 
 class JobCategoryApiView(APIView):
-    serializer_class=JobcategorySerializer
-    def get(self,request):
-        job_categorys=job_category.objects.all().values()
-        return Response({"Message":"List of job catagory ","Job category":job_categorys})
+    serializer_class = JobcategorySerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        job_categorys = job_category.objects.all().values()
+        return Response({"Message": "List of job catagory ", "Job category": job_categorys})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = JobcategorySerializer(data=request.data)
         try:
@@ -329,23 +361,26 @@ class JobCategoryApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class job_categorydetailView(APIView):
-    
-    def get(self,request,job_categorys):
-        job_categorys=job_category.objects.filter(job_category_id=job_categorys)
-        serializer_class=JobcategorySerializer(job_categorys,many=True)
+
+    def get(self, request, job_categorys):
+        job_categorys = job_category.objects.filter(job_category_id=job_categorys)
+        serializer_class = JobcategorySerializer(job_categorys, many=True)
         return Response(serializer_class.data)
+
 
 # API for  Application Starts Here
 
 class ApplicationApiView(APIView):
-    serializer_class=ApplicationSerializer
-    def get(self,request):
-        Applications=Application.objects.all().values()
-        return Response({"Message":"List of Application ","Application":Applications})
+    serializer_class = ApplicationSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        Applications = Application.objects.all().values()
+        return Response({"Message": "List of Application ", "Application": Applications})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = ApplicationSerializer(data=request.data)
         try:
@@ -356,33 +391,37 @@ class ApplicationApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using UserId Only
 class ApplicationdetailView(APIView):
-    
-    def get(self,request,Applications):
-        Applications=Application.objects.filter(application_id=Applications)
-        serializer_class=ApplicationSerializer(Applications,many=True)
+
+    def get(self, request, Applications):
+        Applications = Application.objects.filter(application_id=Applications)
+        serializer_class = ApplicationSerializer(Applications, many=True)
         return Response(serializer_class.data)
+
 
 @api_view(['GET'])
 def get_application_by_user_id(request):
-        queryset = Application.objects.all()
-        user_id = request.query_params.get('user_id', None)
-        if user_id is not None:
-            print('go it')
-            queryset = queryset.filter(user_id=user_id)
-        serializer = ApplicationSerializer(queryset, many=True)
-        return Response({'data': serializer.data})
+    queryset = Application.objects.all()
+    user_id = request.query_params.get('user_id', None)
+    if user_id is not None:
+        print('go it')
+        queryset = queryset.filter(user_id=user_id)
+    serializer = ApplicationSerializer(queryset, many=True)
+    return Response({'data': serializer.data})
+
 
 # API for  Applicant_Document Starts Here
 
 class Applicant_DocumentApiView(APIView):
-    serializer_class=ApplicatDocumentSerializer
-    def get(self,request):
-        Applicant_Documents=Applicant_Document.objects.all().values()
-        return Response({"Message":"List of Applicant_Document ","Applicant_Document":Applicant_Documents})
+    serializer_class = ApplicatDocumentSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        Applicant_Documents = Applicant_Document.objects.all().values()
+        return Response({"Message": "List of Applicant_Document ", "Applicant_Document": Applicant_Documents})
+
+    # to Create Form and POST data to Table
 
     def post(self, request):
         serializer_obj = ApplicatDocumentSerializer(data=request.data)
@@ -394,32 +433,36 @@ class Applicant_DocumentApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 
 class Applicant_DocumentdetailView(generics.ListAPIView):
-    def get(self,request,Applicant_Documents):
-        Applicant_Documents=Applicant_Document.objects.filter(applicant_document_id=Applicant_Documents)
-        serializer_class=ApplicatDocumentSerializer(Applicant_Documents,many=True)
+    def get(self, request, Applicant_Documents):
+        Applicant_Documents = Applicant_Document.objects.filter(applicant_document_id=Applicant_Documents)
+        serializer_class = ApplicatDocumentSerializer(Applicant_Documents, many=True)
         return Response(serializer_class.data)
+
 
 @api_view(['GET'])
 def usered(request):
-        queryset = Applicant_Document.objects.all()
-        user_id = request.query_params.get('user_id', None)
-        if user_id is not None:
-            print('go it')
-            queryset = queryset.filter(user_id=user_id)
-        serializer = ApplicatDocumentSerializer(queryset, many=True)
-        return Response({'data': serializer.data})
-       
+    queryset = Applicant_Document.objects.all()
+    user_id = request.query_params.get('user_id', None)
+    if user_id is not None:
+        print('go it')
+        queryset = queryset.filter(user_id=user_id)
+    serializer = ApplicatDocumentSerializer(queryset, many=True)
+    return Response({'data': serializer.data})
+
+
 # API for  candidate_Evaluation Starts Here
 class Candidate_EvaluationApiView(APIView):
-    serializer_class=candidate_EvaluationSerializer
-    def get(self,request):
-        candidate_Evaluations=candidate_Evaluation.objects.all().values()
-        return Response({"Message":"List of Candidate_evaluation ","Candidate_evaluation":candidate_Evaluations})
+    serializer_class = candidate_EvaluationSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        candidate_Evaluations = candidate_Evaluation.objects.all().values()
+        return Response({"Message": "List of Candidate_evaluation ", "Candidate_evaluation": candidate_Evaluations})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = candidate_EvaluationSerializer(data=request.data)
         try:
@@ -430,33 +473,39 @@ class Candidate_EvaluationApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class CandidateEvaluationdetailView(APIView):
-    
-    def get(self,request,candidate_Evaluations):
-        candidate_Evaluations=candidate_Evaluation.objects.filter(candidate_evaluation_id=candidate_Evaluations)
-        serializer_class=candidate_EvaluationSerializer(candidate_Evaluations,many=True)
+
+    def get(self, request, candidate_Evaluations):
+        candidate_Evaluations = candidate_Evaluation.objects.filter(candidate_evaluation_id=candidate_Evaluations)
+        serializer_class = candidate_EvaluationSerializer(candidate_Evaluations, many=True)
         return Response(serializer_class.data)
+
+
 # to search Candidate evaluation using Job ID
 @api_view(['GET'])
 def get_candidate_by_job_id(request):
-        queryset = candidate_Evaluation.objects.all()
-        job_id = request.query_params.get('job_id', None)
-        if job_id is not None:
-            print('go it')
-            queryset = queryset.filter(job_id=job_id)
-        serializer = candidate_EvaluationSerializer(queryset, many=True)
-        return Response({'data': serializer.data})
+    queryset = candidate_Evaluation.objects.all()
+    job_id = request.query_params.get('job_id', None)
+    if job_id is not None:
+        print('go it')
+        queryset = queryset.filter(job_id=job_id)
+    serializer = candidate_EvaluationSerializer(queryset, many=True)
+    return Response({'data': serializer.data})
+
 
 # API for  Job_Description_Document Starts Here
 
 class Job_Description_DocumentApiView(APIView):
-    serializer_class=jobDiscriptionSerializer
-    def get(self,request):
-        Job_Description_Documents=Job_Description_Document.objects.all().values()
-        return Response({"Message":"List of Job_Description_Document ","Job_Description_Document":Job_Description_Documents})
+    serializer_class = jobDiscriptionSerializer
 
-# to Create Form and POST data to Table
+    def get(self, request):
+        Job_Description_Documents = Job_Description_Document.objects.all().values()
+        return Response(
+            {"Message": "List of Job_Description_Document ", "Job_Description_Document": Job_Description_Documents})
+
+    # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = jobDiscriptionSerializer(data=request.data)
         try:
@@ -467,10 +516,75 @@ class Job_Description_DocumentApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+
 # API used to retrive User Detail Using User Id Only
 class JobDiscriptiondetailView(APIView):
-    
-    def get(self,request,Job_Description_Documents):
-        Job_Description_Documents=Job_Description_Document.objects.filter(job_description_id=Job_Description_Documents)
-        serializer_class=jobDiscriptionSerializer(Job_Description_Documents,many=True)
-        return Response(serializer_class.data)
+
+    def get(self, request, Job_Description_Documents):
+        Job_Description_Documents = Job_Description_Document.objects.filter(
+            job_description_id=Job_Description_Documents)
+        serializer_class = jobDiscriptionSerializer(Job_Description_Documents, many=True)
+        return Response(serializer_class.data) @ api_view(['GET'])
+
+
+@api_view(['GET'])
+def get_applicant_score(request):
+    job_id = request.query_params.get('job_id', None)
+    if job_id is not None:
+        job = Job.objects.all().filter(job_id=job_id)
+        job_ser = JobSerializer(job, many=True)
+        job_file = job_ser.data[0]['file']
+        applications_querysets = Application.objects.all().filter(job=job_id)
+        applications = ApplicationSerializer(applications_querysets, many=True)
+        # return Response({'Message': 'Success', 'data': applications.data})
+        # loop fore each application
+        candidate_evaluations = []
+        for application in applications.data:
+            try:
+                user_id = application['user']
+                applicant_document_q = Applicant_Document.objects.all().filter(user=user_id)
+                applicant_doc = ApplicatDocumentSerializer(applicant_document_q, many=True)
+                user_file = applicant_doc.data[0]['document']
+                job_file_path = os.path.join(settings.BASE_DIR, job_file)
+
+                user_file_path = os.path.join(settings.BASE_DIR, user_file)
+                print('user_file: ' + user_file_path)
+                print('job_file: ' + job_file_path)
+                #return Response({'jobfile': job_file_path, 'userfile': user_file_path}
+                resume_s = extract_text_from_pdf(user_file_path)
+                jobdesc = extract_text_from_pdf(job_file_path)
+                score_r = score(resume_s, jobdesc)
+                evaluation_result = score_r
+
+                candidate = candidate_Evaluation()
+                #candidate.candidate_evaluation_id = 0
+                candidate.evaluation_notes = ''
+                candidate.job_id = job_id
+                candidate.evaluation_result=evaluation_result
+                candidate.applicant_id = user_id
+                user_obj = user.objects.get(pk=user_id)
+
+                candidate.applicant = user_obj
+
+                job_obj = Job.objects.get(pk=job_id)
+                candidate.job = job_obj
+
+                candidate_evaluations.append(candidate)
+                candidate_ser = candidate_EvaluationSerializer(data=candidate)
+                #if candidate.is_valid():
+                try:
+                    candidate.save()
+                    print('Saving success')
+                except Exception as e:
+                    print(e)
+                    continue
+                    #print(candidate_ser.errors)
+                #return Response({'jobfile': job_file_path, 'userfile': user_file_path})
+            except Exception as e:
+                print('score error')
+                print(e)
+                continue
+    else:
+        return Response({'Error': 'No job id is provided'})
+
+    # at the end

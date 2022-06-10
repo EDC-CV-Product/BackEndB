@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from ATS_APP import views
 from rest_framework.urlpatterns import format_suffix_patterns
+from ATS_Project import settings
 
 from ATS_APP.models import *
 
@@ -86,6 +87,6 @@ urlpatterns = [
 
     path('Job_Description_Documents/',views.Job_Description_DocumentApiView.as_view(),name="Job Category"),
     path('Job_Description_Documents/<int:Job_Description_Documents>',views.JobDiscriptiondetailView.as_view(),name="Job Category Detail View"),
-
+    path('applicantScore', views.get_applicant_score)
 
     ]
