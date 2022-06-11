@@ -33,6 +33,17 @@ class UserApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+    def put(self, request):
+        queryset = user.objects.get(id=request.data['user_id'])
+        serializer = UserSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
+
 # API used to retrive User Detail Using User Id Only
 class userdetailView(APIView):
     
