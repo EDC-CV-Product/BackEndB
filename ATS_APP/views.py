@@ -34,7 +34,7 @@ class UserApiView(APIView):
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
     def put(self, request):
-        queryset = user.objects.get(id=request.data['user_id'])
+        queryset = user.objects.get(user_id=request.data['user_id'])
         serializer = UserSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
