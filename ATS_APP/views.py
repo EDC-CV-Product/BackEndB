@@ -20,7 +20,7 @@ class UserApiView(APIView):
     serializer_class=UserSerializer
     def get(self,request):
         users=user.objects.all().values()
-        return Response({"Message":"List of Users","Users List":users})
+        return Response({"Message":"Sucess","data":users})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -58,7 +58,7 @@ class UserRoleApiView(APIView):
     serializer_class=UserRoleSerializer
     def get(self,request):
         User_Roles=User_Role.objects.all().values()
-        return Response({"Message":"List of User roles","User Role List":User_Roles})
+        return Response({"Message":"Sucess","data":User_Roles})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -85,7 +85,7 @@ class RoleApiView(APIView):
     serializer_class=RoleSerializer
     def get(self,request):
         Roles=Role.objects.all().values()
-        return Response({"Message":"List of User roles"," Role List":Roles})
+        return Response({"Message":"Sucess","data":Roles})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -112,7 +112,7 @@ class SkillsetApiView(APIView):
     serializer_class=SkillsetSerializer
     def get(self,request):
         Skill_Sets=Skill_Set.objects.all().values()
-        return Response({"Message":"List of User roles","User Role List":Skill_Sets})
+        return Response({"Message":"Sucess","data":Skill_Sets})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -139,7 +139,7 @@ class JobPlatformApiView(APIView):
     serializer_class=jobplatformSerializer
     def get(self,request):
         job_platform=job_platforms.objects.all().values()
-        return Response({"Message":"List of Job Platforms","Job Platform List":job_platform})
+        return Response({"Message":"Sucess","data":job_platform})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -167,7 +167,7 @@ class CompanyApiView(APIView):
     serializer_class=CompanySerializer
     def get(self,request):
         Companys=Company.objects.all().values()
-        return Response({"Message":"List of companey","companey List":Companys})
+        return Response({"Message":"Sucess","data":Companys})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -195,7 +195,7 @@ class applicant_cvApiView(APIView):
     serializer_class=Applicant_cvSerializer
     def get(self,request):
         applicant_cvs=applicant_cv.objects.all().values()
-        return Response({"Message":"List of applicant cv","applicant cv List":applicant_cvs})
+        return Response({"Message":"Sucess","data":applicant_cvs})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -223,7 +223,7 @@ class ExperianceApiView(APIView):
     serializer_class=ExperianceSerializer
     def get(self,request):
         Experiences=Experience.objects.all().values()
-        return Response({"Message":"List of Job Platforms","Job Platform List":Experiences})
+        return Response({"Message":"Sucess","data":Experiences})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -251,7 +251,7 @@ class EducationApiView(APIView):
     serializer_class=EducationSerializer
     def get(self,request):
         Educations=Education.objects.all().values()
-        return Response({"Message":"List of Job Platforms","Job Platform List":Educations})
+        return Response({"Message":"Sucess","data":Educations})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -279,7 +279,7 @@ class JobApiView(APIView):
     serializer_class=JobSerializer
     def get(self,request):
         Jobs=Job.objects.all().values()
-        return Response({"Message":"List of Job ","Job  List":Jobs})
+        return Response({"Message":"Sucess","data":Jobs})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -316,7 +316,7 @@ class JobCategoryApiView(APIView):
     serializer_class=JobcategorySerializer
     def get(self,request):
         job_categorys=job_category.objects.all().values()
-        return Response({"Message":"List of job catagory ","Job category":job_categorys})
+        return Response({"Message":"Sucess","data":job_categorys})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -343,7 +343,7 @@ class ApplicationApiView(APIView):
     serializer_class=ApplicationSerializer
     def get(self,request):
         Applications=Application.objects.all().values()
-        return Response({"Message":"List of Application ","Application":Applications})
+        return Response({"Message":"Sucess","data":Applications})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -380,7 +380,7 @@ class Applicant_DocumentApiView(APIView):
     serializer_class=ApplicatDocumentSerializer
     def get(self,request):
         Applicant_Documents=Applicant_Document.objects.all().values()
-        return Response({"Message":"List of Applicant_Document ","Applicant_Document":Applicant_Documents})
+        return Response({"Message":"Sucess","data":Applicant_Documents})
 
 # to Create Form and POST data to Table
 
@@ -417,7 +417,7 @@ class Candidate_EvaluationApiView(APIView):
     serializer_class=candidate_EvaluationSerializer
     def get(self,request):
         candidate_Evaluations=candidate_Evaluation.objects.all().values()
-        return Response({"Message":"List of Candidate_evaluation ","Candidate_evaluation":candidate_Evaluations})
+        return Response({"Message":"Sucess","data":candidate_Evaluations})
 
 # to Create Form and POST data to Table
     def post(self, request):
@@ -454,7 +454,7 @@ class Job_Description_DocumentApiView(APIView):
     serializer_class=jobDiscriptionSerializer
     def get(self,request):
         Job_Description_Documents=Job_Description_Document.objects.all().values()
-        return Response({"Message":"List of Job_Description_Document ","Job_Description_Document":Job_Description_Documents})
+        return Response({"Message":"Sucess","data":Job_Description_Documents})
 
 # to Create Form and POST data to Table
     def post(self, request):
