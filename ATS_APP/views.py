@@ -32,7 +32,7 @@ class UserApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
-
+# function to update the detail of the data found in the database
     def put(self, request):
         queryset = user.objects.get(id=request.data['id'])
         serializer = UserSerializer(queryset, data= request.data)
@@ -81,6 +81,16 @@ class UserRoleApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+    def put(self, request):
+        queryset = User_Role.objects.get(id=request.data['user_role_id'])
+        serializer = UserRoleSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 
 # API used to retrive User Detail Using User Id Only
 class userroledetailView(APIView):
@@ -108,6 +118,17 @@ class RoleApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+#to update the detail of the based on the given data
+    def put(self, request):
+        queryset = Role.objects.get(id=request.data['role_id'])
+        serializer = RoleSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 
 # API used to retrive User Detail Using User Id Only
 class roledetailView(APIView):
@@ -135,6 +156,17 @@ class SkillsetApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+    #to update the detail of the based on the given data
+    def put(self, request):
+        queryset = Skill_Set.objects.get(id=request.data['skill_set_id'])
+        serializer = SkillsetSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 
 # API used to retrive User Detail Using User Id Only
 class skilldetailView(APIView):
@@ -162,6 +194,18 @@ class JobPlatformApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+
+      #to update the detail of the based on the given data
+    def put(self, request):
+        queryset = job_platforms.objects.get(id=request.data['job_platform_id'])
+        serializer = jobplatformSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 
 # API used to retrive User Detail Using User Id Only
 class jobplatdetailView(APIView):
@@ -191,6 +235,18 @@ class CompanyApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+       #to update the detail of the based on the given data
+    def put(self, request):
+        queryset = Company.objects.get(id=request.data['companey_id'])
+        serializer = CompanySerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
+
 # API used to retrive User Detail Using User Id Only
 class CompanydetailView(APIView):
     
@@ -218,6 +274,18 @@ class applicant_cvApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+
+        #to update the detail of the based on the given data
+    def put(self, request):
+        queryset = applicant_cv.objects.get(id=request.data['applicant_id'])
+        serializer = Applicant_cvSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 
 # API used to retrive User Detail Using User Id Only
 class Applicant_cvdetailView(APIView):
@@ -247,6 +315,18 @@ class ExperianceApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+         #to update the detail of the based on the given data
+    def put(self, request):
+        queryset = Experience.objects.get(id=request.data['experiance_id'])
+        serializer = ExperianceSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
+
 # API used to retrive User Detail Using User Id Only
 class ExperiancedetailView(APIView):
     
@@ -274,6 +354,17 @@ class EducationApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+#update operation on data from database based on the the primary Key
+    def put(self, request):
+        queryset = Education.objects.get(id=request.data['education_id'])
+        serializer = EducationSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 
 # API used to retrive User Detail Using User Id Only
 class EducationdetailView(APIView):
@@ -302,6 +393,18 @@ class JobApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+
+    #update operation on data from database based on the the primary Key
+    def put(self, request):
+        queryset = Job.objects.get(id=request.data['job_id'])
+        serializer = JobSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 
 # API used to retrive User Detail Using User Id Only
 class jobdetailView(APIView):
@@ -340,6 +443,18 @@ class JobCategoryApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+     #update operation on data from database based on the the primary Key
+    def put(self, request):
+        queryset = job_category.objects.get(id=request.data['job_category_id'])
+        serializer = JobcategorySerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
+
 # API used to retrive User Detail Using User Id Only
 class job_categorydetailView(APIView):
     
@@ -366,6 +481,18 @@ class ApplicationApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+
+     #update operation on data from database based on the the primary Key
+    def put(self, request):
+        queryset = Application.objects.get(id=request.data['application_id'])
+        serializer = ApplicationSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 
 # API used to retrive User Detail Using UserId Only
 class ApplicationdetailView(APIView):
@@ -405,6 +532,18 @@ class Applicant_DocumentApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
+      #update operation on data from database based on the the primary Key
+    def put(self, request):
+        queryset = Applicant_Document.objects.get(id=request.data['applicant_document_id'])
+        serializer = ApplicatDocumentSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
+
 # API used to retrive User Detail Using User Id Only
 
 class Applicant_DocumentdetailView(generics.ListAPIView):
@@ -440,6 +579,18 @@ class Candidate_EvaluationApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+
+      #update operation on data from database based on the the primary Key
+    def put(self, request):
+        queryset = candidate_Evaluation.objects.get(id=request.data['candidate_evaluation_id'])
+        serializer = candidate_EvaluationSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 
 # API used to retrive User Detail Using User Id Only
 class CandidateEvaluationdetailView(APIView):
@@ -477,6 +628,17 @@ class Job_Description_DocumentApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+# Data Udation based on the given requierment of the primary key
+    def put(self, request):
+        queryset = Job_Description_Document.objects.get(id=request.data['job_description_id'])
+        serializer = jobDiscriptionSerializer(queryset, data= request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 
 # API used to retrive User Detail Using User Id Only
 class JobDiscriptiondetailView(APIView):
