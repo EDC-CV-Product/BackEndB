@@ -42,7 +42,15 @@ INSTALLED_APPS = [
     'ATS_APP',
     'rest_framework',
     'django_filters',
-]
+    'corsheaders',
+    ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+X_FRAME_OPTIONS = 'ALLOWALL'
+ROOT_URLCONF = 'ATS_Pro.urls'
+MEDIA_URL = 'applicant-file/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'CV_ROOT/')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

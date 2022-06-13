@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from ATS_Project import settings
 from ATS_APP import views
 from rest_framework.urlpatterns import format_suffix_patterns
+from django.conf.urls.static import static
 
 from ATS_APP.models import *
 
@@ -33,6 +35,7 @@ urlpatterns = [
 
     path('User_Roles/',views.UserRoleApiView.as_view(),name="User Role"),
     path('User_Roles/<int:User_Roles>',views.userroledetailView.as_view(),name="User Role Detail View"),
+    path('users/get_by_id',get_by_id,name="User Role Using id"),
 
 
     path('Roles/',views.RoleApiView.as_view(),name="Role"),
@@ -88,4 +91,4 @@ urlpatterns = [
     path('Job_Description_Documents/<int:Job_Description_Documents>',views.JobDiscriptiondetailView.as_view(),name="Job Category Detail View"),
 
 
-    ]
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

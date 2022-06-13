@@ -147,7 +147,7 @@ class Application(models.Model):
 
 class Applicant_Document(models.Model):
     applicant_document_id = models.AutoField(primary_key=True)
-    name=models.CharField(max_length=30)
+    name=models.CharField(max_length=200)
     document= models.FileField()
     url = models.CharField(max_length=90,null=True)
     last_updated = models.DateTimeField(max_length=30)
