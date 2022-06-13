@@ -82,7 +82,7 @@ class UserRoleApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
     def put(self, request):
-        queryset = User_Role.objects.get(id=request.data['user_role_id'])
+        queryset = User_Role.objects.get(user_role_id=request.data['user_role_id'])
         serializer = UserRoleSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
