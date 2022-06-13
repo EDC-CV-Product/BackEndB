@@ -120,7 +120,7 @@ class RoleApiView(APIView):
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 #to update the detail of the based on the given data
     def put(self, request):
-        queryset = Role.objects.get(id=request.data['role_id'])
+        queryset = Role.objects.get(role_id=request.data['role_id'])
         serializer = RoleSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -158,7 +158,7 @@ class SkillsetApiView(APIView):
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
     #to update the detail of the based on the given data
     def put(self, request):
-        queryset = Skill_Set.objects.get(id=request.data['skill_set_id'])
+        queryset = Skill_Set.objects.get(skill_set_id=request.data['skill_set_id'])
         serializer = SkillsetSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -197,7 +197,7 @@ class JobPlatformApiView(APIView):
 
       #to update the detail of the based on the given data
     def put(self, request):
-        queryset = job_platforms.objects.get(id=request.data['job_platform_id'])
+        queryset = job_platforms.objects.get(job_platform_id=request.data['job_platform_id'])
         serializer = jobplatformSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -237,7 +237,7 @@ class CompanyApiView(APIView):
 
        #to update the detail of the based on the given data
     def put(self, request):
-        queryset = Company.objects.get(id=request.data['companey_id'])
+        queryset = Company.objects.get(companey_id=request.data['companey_id'])
         serializer = CompanySerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -277,7 +277,7 @@ class applicant_cvApiView(APIView):
 
         #to update the detail of the based on the given data
     def put(self, request):
-        queryset = applicant_cv.objects.get(id=request.data['applicant_id'])
+        queryset = applicant_cv.objects.get(applicant_id=request.data['applicant_id'])
         serializer = Applicant_cvSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -317,7 +317,7 @@ class ExperianceApiView(APIView):
 
          #to update the detail of the based on the given data
     def put(self, request):
-        queryset = Experience.objects.get(id=request.data['experiance_id'])
+        queryset = Experience.objects.get(experiance_id=request.data['experiance_id'])
         serializer = ExperianceSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -356,7 +356,7 @@ class EducationApiView(APIView):
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 #update operation on data from database based on the the primary Key
     def put(self, request):
-        queryset = Education.objects.get(id=request.data['education_id'])
+        queryset = Education.objects.get(education_id=request.data['education_id'])
         serializer = EducationSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -396,7 +396,7 @@ class JobApiView(APIView):
 
     #update operation on data from database based on the the primary Key
     def put(self, request):
-        queryset = Job.objects.get(id=request.data['job_id'])
+        queryset = Job.objects.get(job_id=request.data['job_id'])
         serializer = JobSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -445,7 +445,7 @@ class JobCategoryApiView(APIView):
 
      #update operation on data from database based on the the primary Key
     def put(self, request):
-        queryset = job_category.objects.get(id=request.data['job_category_id'])
+        queryset = job_category.objects.get(job_category_id=request.data['job_category_id'])
         serializer = JobcategorySerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -484,7 +484,7 @@ class ApplicationApiView(APIView):
 
      #update operation on data from database based on the the primary Key
     def put(self, request):
-        queryset = Application.objects.get(id=request.data['application_id'])
+        queryset = Application.objects.get(application_id=request.data['application_id'])
         serializer = ApplicationSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -534,7 +534,7 @@ class Applicant_DocumentApiView(APIView):
 
       #update operation on data from database based on the the primary Key
     def put(self, request):
-        queryset = Applicant_Document.objects.get(id=request.data['applicant_document_id'])
+        queryset = Applicant_Document.objects.get(applicant_document_id=request.data['applicant_document_id'])
         serializer = ApplicatDocumentSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -582,7 +582,7 @@ class Candidate_EvaluationApiView(APIView):
 
       #update operation on data from database based on the the primary Key
     def put(self, request):
-        queryset = candidate_Evaluation.objects.get(id=request.data['candidate_evaluation_id'])
+        queryset = candidate_Evaluation.objects.get(candidate_evaluation_id=request.data['candidate_evaluation_id'])
         serializer = candidate_EvaluationSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -630,7 +630,7 @@ class Job_Description_DocumentApiView(APIView):
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 # Data Udation based on the given requierment of the primary key
     def put(self, request):
-        queryset = Job_Description_Document.objects.get(id=request.data['job_description_id'])
+        queryset = Job_Description_Document.objects.get(job_description_id=request.data['job_description_id'])
         serializer = jobDiscriptionSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
