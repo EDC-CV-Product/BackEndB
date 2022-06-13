@@ -546,8 +546,10 @@ def get_applicant_score(request):
                 applicant_doc = ApplicatDocumentSerializer(applicant_document_q, many=True)
                 user_file = applicant_doc.data[0]['document']
                 job_file_path = os.path.join(settings.BASE_DIR, job_file)
-
                 user_file_path = os.path.join(settings.BASE_DIR, user_file)
+                
+                print(job_file_path, user_file_path)
+
                 print('user_file: ' + user_file_path)
                 print('job_file: ' + job_file_path)
                 #return Response({'jobfile': job_file_path, 'userfile': user_file_path}
@@ -584,6 +586,8 @@ def get_applicant_score(request):
                 print('score error')
                 print(e)
                 continue
+            return Response({'Message': 'Success',
+                 'data': candidate_EvaluationSerializer(candidate_evaluations, many=True).data})
     else:
         return Response({'Error': 'No job id is provided'})
 
