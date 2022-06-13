@@ -114,7 +114,7 @@ def get_by_id(request):
         id = request.query_params.get('id', None)
         if id is not None:
             print('go it')
-            queryset = queryset.filter(id=id)
+            queryset = queryset.filter(user_role_id=user)
         serializer = UserRoleSerializer(queryset, many=True)
         return Response({'data': serializer.data})
 
