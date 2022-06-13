@@ -2,6 +2,9 @@ from email.mime import application
 from urllib import request
 from django.shortcuts import render
 
+import pathlib
+from pathlib import Path
+
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -526,7 +529,6 @@ class JobDiscriptiondetailView(APIView):
         serializer_class = jobDiscriptionSerializer(Job_Description_Documents, many=True)
         return Response(serializer_class.data) @ api_view(['GET'])
 
-
 @api_view(['GET'])
 def get_applicant_score(request):
     job_id = request.query_params.get('job_id', None)
@@ -534,6 +536,7 @@ def get_applicant_score(request):
         job = Job.objects.all().filter(job_id=job_id)
         job_ser = JobSerializer(job, many=True)
         job_file = job_ser.data[0]['file']
+        # job_file_ext = os.path.splitext(job_file.name)[-1].lower()
         applications_querysets = Application.objects.all().filter(job=job_id)
         applications = ApplicationSerializer(applications_querysets, many=True)
         # return Response({'Message': 'Success', 'data': applications.data})
@@ -545,16 +548,20 @@ def get_applicant_score(request):
                 applicant_document_q = Applicant_Document.objects.all().filter(user=user_id)
                 applicant_doc = ApplicatDocumentSerializer(applicant_document_q, many=True)
                 user_file = applicant_doc.data[0]['document']
-                job_file_path = os.path.join(settings.BASE_DIR, job_file)
-                user_file_path = os.path.join(settings.BASE_DIR, user_file)
+                # user_file_ext = os.path.splitext(user_file.name)[-1].lower()
+                job_file_path = settings.BASE_DIR + job_file
+                print('base directory' + settings.BASE_DIR)
                 
+                user_file_path = settings.BASE_DIR + user_file
+
                 print(job_file_path, user_file_path)
 
                 print('user_file: ' + user_file_path)
                 print('job_file: ' + job_file_path)
                 #return Response({'jobfile': job_file_path, 'userfile': user_file_path}
-                resume_s = extract_text_from_pdf(user_file_path)
-                jobdesc = extract_text_from_pdf(job_file_path)
+                resume_s = extract_text(user_file_path)
+                print(resume_s)
+                jobdesc = extract_text(job_file_path)
                 score_r = score(resume_s, jobdesc)
                 evaluation_result = score_r
 

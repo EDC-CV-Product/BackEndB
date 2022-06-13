@@ -157,12 +157,15 @@ def extract_text_from_doc(doc_path):
     return ' '.join(text)
 
 
-def extract_text(file_path, extension):
+def extract_text(file_path):
     '''
     Wrapper function to detect the file extension and call text extraction function accordingly
     :param file_path: path of file of which text is to be extracted
-    :param extension: extension of file `file_name`
     '''
+
+    extension = os.path.splitext(file_path)[-1].lower()
+    #os.path.basename(filepath)
+
     text = ''
     if extension == '.pdf':
         for page in extract_text_from_pdf(file_path):
