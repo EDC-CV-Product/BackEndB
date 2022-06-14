@@ -35,7 +35,8 @@ urlpatterns = [
 
     path('User_Roles/',views.UserRoleApiView.as_view(),name="User Role"),
     path('User_Roles/<int:User_Roles>',views.userroledetailView.as_view(),name="User Role Detail View"),
-    path('users/get_by_id',get_by_id,name="User Role Using id"),
+    path('User_Roles/get_by_id',get_by_id,name="User Role Using id"),
+    path('User_Roles/delete',delete,name=" Delete User Role Using id"),
 
 
     path('Roles/',views.RoleApiView.as_view(),name="Role"),

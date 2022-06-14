@@ -1,5 +1,5 @@
 from email.mime import application
-from urllib import request
+from urllib import request, response
 from django.shortcuts import render
 
 from rest_framework.views import APIView
@@ -80,8 +80,8 @@ class UserRoleApiView(APIView):
         serializer_obj = UserRoleSerializer(data=request.data)
         try:
             if serializer_obj.is_valid():
-                serializer_obj.save()
-                return Response(serializer_obj.data, status.HTTP_201_CREATED)
+               serializer_obj.save()
+            return Response(serializer_obj.data, status.HTTP_201_CREATED)
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
@@ -99,6 +99,17 @@ class UserRoleApiView(APIView):
             print(e)
             return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 
+    #Delete User role Using User ID
+    def delete(self, request):
+            queryset=User_Role.objects.filter(user=request.data['user_id'])
+            print(queryset)
+            if queryset:
+                    queryset.delete()
+                    return Response({"Message":"Success"}, status=status.HTTP_200_OK)
+            else:
+                    return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)
+      # return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
 # API used to retrive User Detail Using User Id Only
 class userroledetailView(APIView):
     
@@ -111,20 +122,13 @@ class userroledetailView(APIView):
 @api_view(['GET'])
 def get_by_id(request):
         queryset = User_Role.objects.all()
-        id = request.query_params.get('id', None)
-        if id is not None:
+        user_id = request.query_params.get('user_id', None)
+        if user_id is not None:
             print('go it')
-            queryset = queryset.filter(user_role_id=user)
+            queryset = queryset.filter(user_id=user_id)
         serializer = UserRoleSerializer(queryset, many=True)
         return Response({'data': serializer.data})
-
 # remove by using User Id from user roles
-@api_view(['DELETE'])
-def delete_by_user_id(request):
-    queryset=User_Role.objects.delete()
-    serializer=UserRoleSerializer(queryset,many=True)
-    return Response({'message': 'Success','data':serializer.data})
-
 
 # API for  Role Starts Here
 
@@ -198,6 +202,7 @@ class SkillsetApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
+
 
 # API used to retrive User Detail Using User Id Only
 class skilldetailView(APIView):
@@ -392,10 +397,12 @@ class EducationApiView(APIView):
             if serializer.is_valid():
                 serializer.save()
                 return Response(data=serializer.data, status=status.HTTP_200_OK)
+            else:
+                print(serializer.errors)
+                return Response(serializer.errors, status.HTTP_404_NOT_FOUND)
         except Exception as e:
             print(e)
             return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
-
 # API used to retrive User Detail Using User Id Only
 class EducationdetailView(APIView):
     
@@ -499,16 +506,20 @@ class ApplicationApiView(APIView):
         Applications=Application.objects.all().values()
         return Response({"Message":"Success","data":Applications})
 
-# to Create Form and POST data to Table
+# to Create Form and POST data to Table and delete duplicate value
     def post(self, request):
         serializer_obj = ApplicationSerializer(data=request.data)
         try:
             if serializer_obj.is_valid():
+                previous_apps=Application.objects.filter(user=request.data['user'],job=request.data['job'])
+                if previous_apps is not None:
+                     previous_apps.delete()
                 serializer_obj.save()
                 return Response(serializer_obj.data, status.HTTP_201_CREATED)
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+
 
      #update operation on data from database based on the the primary Key
     def put(self, request):
@@ -521,6 +532,14 @@ class ApplicationApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
+
+# to delete Aspesfic Object from the given model
+def delete(self, request, id, format=None):
+        user = application.objects.get(id=id)
+        if user:
+            user.delete()
+            return Response({"status":"ok"}, status=status.HTTP_200_OK)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # API used to retrive User Detail Using UserId Only
 class ApplicationdetailView(APIView):
@@ -554,6 +573,10 @@ class Applicant_DocumentApiView(APIView):
         serializer_obj = ApplicatDocumentSerializer(data=request.data)
         try:
             if serializer_obj.is_valid():
+                previous_docs=Applicant_Document.objects.filter(user=request.data['user'])
+                print(previous_docs)
+                if previous_docs is not None:
+                    previous_docs.delete()
                 serializer_obj.save()
                 return Response(serializer_obj.data, status.HTTP_201_CREATED)
         except Exception as e:
@@ -589,7 +612,23 @@ def usered(request):
             queryset = queryset.filter(user_id=user_id)
         serializer = ApplicatDocumentSerializer(queryset, many=True)
         return Response({'data': serializer.data})
-       
+# Deleting all objectes of Spesfic Model Before puting Data
+def delete(self, request, format=None):
+        users = application.objects.all()
+        if users:
+            users.delete()
+            return Response({"status":"ok"}, status=status.HTTP_200_OK)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# to delete Aspesfic Object from the given model
+def delete(self, request, user_name, format=None):
+        user = application.objects.get(username=user_name)
+        if user:
+            user.delete()
+            return Response({"status":"ok"}, status=status.HTTP_200_OK)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 # API for  candidate_Evaluation Starts Here
 class Candidate_EvaluationApiView(APIView):
     serializer_class=candidate_EvaluationSerializer

@@ -32,7 +32,6 @@ class Role(models.Model):
     role_id = models.AutoField(primary_key=True)
     name= models.CharField(max_length=30)
 
-
 class Skill_Set(models.Model):
     skill_set_id = models.AutoField(primary_key=True)
     skill = models.CharField(max_length=1000)
