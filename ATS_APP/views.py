@@ -441,7 +441,7 @@ class JobApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 # deleting Job Using User_ID
-    def delete_Job(self, request):
+    def delete(self, request):
             queryset=Job.objects.filter(job_id=request.data['job_id'])
             print(queryset)
             if queryset:
@@ -541,7 +541,7 @@ class ApplicationApiView(APIView):
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
     #Delete Application Using Using User ID
-    def delete_Application(self, request):
+    def delete(self, request):
             queryset=Application.objects.filter(application_id=request.data['user_id'])
             print(queryset)
             if queryset:
@@ -605,7 +605,7 @@ class Applicant_DocumentApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
     #Delete Application Document Using User ID
-    def dele_app(self, request):
+    def delete(self, request):
             queryset=Applicant_Document.objects.filter(applicant_document_id=request.data['user_id'])
             print(queryset)
             if queryset:
