@@ -14,6 +14,11 @@ from django_filters import rest_framework as filters
 from rest_framework import filters
 from rest_framework import generics
 from django.db.models import Q
+from ATS_Project import settings
+
+import os
+from .resume_scan import *
+from .utils import *
 
 
 # API that used to retun all Data In the Database Table
@@ -615,7 +620,7 @@ class Applicant_DocumentApiView(APIView):
                     return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)
       #update operation on data from database based on the the primary Key
     def put(self, request):
-        queryset = Applicant_Document.objects.get(applicant_document_id=request.data['applicant_document_id'])
+        queryset = Applicant_Document.objects.get(applicant_document_id=request.data['user_id'])
         serializer = ApplicatDocumentSerializer(queryset, data= request.data)
         try:
             if serializer.is_valid():
@@ -728,3 +733,73 @@ class JobDiscriptiondetailView(APIView):
         Job_Description_Documents=Job_Description_Document.objects.get(job_description_id=Job_Description_Documents)
         serializer_class=jobDiscriptionSerializer(Job_Description_Documents)
         return Response({'Message': 'Success', 'data': serializer_class.data})
+
+
+@api_view(['GET'])
+def get_applicant_score(request):
+    job_id = request.query_params.get('job_id', None)
+    if job_id is not None:
+        job = Job.objects.all().filter(job_id=job_id)
+        job_ser = JobSerializer(job, many=True)
+        job_file = job_ser.data[0]['file']
+        # job_file_ext = os.path.splitext(job_file.name)[-1].lower()
+        applications_querysets = Application.objects.all().filter(job=job_id)
+        applications = ApplicationSerializer(applications_querysets, many=True)
+        # return Response({'Message': 'Success', 'data': applications.data})
+        # loop fore each application
+        candidate_evaluations = []
+        for application in applications.data:
+            try:
+                user_id = application['user']
+                applicant_document_q = Applicant_Document.objects.all().filter(user=user_id)
+                applicant_doc = ApplicatDocumentSerializer(applicant_document_q, many=True)
+                user_file = applicant_doc.data[0]['document']
+                # user_file_ext = os.path.splitext(user_file.name)[-1].lower()
+                job_file_path = settings.BASE_DIR + job_file
+                print('base directory' + settings.BASE_DIR)
+                
+                user_file_path = settings.BASE_DIR + user_file
+
+                print(job_file_path, user_file_path)
+
+                print('user_file: ' + user_file_path)
+                print('job_file: ' + job_file_path)
+                #return Response({'jobfile': job_file_path, 'userfile': user_file_path}
+                resume_s = extract_text(user_file_path)
+                print(resume_s)
+                jobdesc = extract_text(job_file_path)
+                score_r = score(resume_s, jobdesc)
+                evaluation_result = score_r
+
+                candidate = candidate_Evaluation()
+                #candidate.candidate_evaluation_id = 0
+                candidate.evaluation_notes = ''
+                candidate.job_id = job_id
+                candidate.evaluation_result=evaluation_result
+                candidate.applicant_id = user_id
+                user_obj = user.objects.get(pk=user_id)
+
+                candidate.applicant = user_obj
+
+                job_obj = Job.objects.get(pk=job_id)
+                candidate.job = job_obj
+
+                candidate_evaluations.append(candidate)
+                candidate_ser = candidate_EvaluationSerializer(data=candidate)
+                #if candidate.is_valid():
+                try:
+                    candidate.save()
+                    print('Saving success')
+                except Exception as e:
+                    print(e)
+                    continue
+                    #print(candidate_ser.errors)
+                #return Response({'jobfile': job_file_path, 'userfile': user_file_path})
+            except Exception as e:
+                print('score error')
+                print(e)
+                continue
+            return Response({'Message': 'Success',
+                 'data': candidate_EvaluationSerializer(candidate_evaluations, many=True).data})
+    else:
+        return Response({'Error': 'No job id is provided'})

@@ -94,5 +94,7 @@ urlpatterns = [
     path('Job_Description_Documents/',views.Job_Description_DocumentApiView.as_view(),name="Job Category"),
     path('Job_Description_Documents/<int:Job_Description_Documents>',views.JobDiscriptiondetailView.as_view(),name="Job Category Detail View"),
 
+    path('applicantScore/get_applicant_score',get_applicant_score, name="Applicant Score")
+
 
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
