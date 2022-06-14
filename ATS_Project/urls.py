@@ -32,12 +32,12 @@ urlpatterns = [
     path('users/<int:users>',views.userdetailView.as_view(),name="User search by thier DI"),
     #Url for search query paramter string in the URL
     path('users/by_email',get_user_by_email,name="User Detail Using Email"),
+    #path('users/delete',delete,name="Delete User By User ID"),
 
     path('User_Roles/',views.UserRoleApiView.as_view(),name="User Role"),
     path('User_Roles/<int:User_Roles>',views.userroledetailView.as_view(),name="User Role Detail View"),
     path('User_Roles/get_by_id',get_by_id,name="User Role Using id"),
-    path('User_Roles/delete',delete,name=" Delete User Role Using id"),
-
+    
 
     path('Roles/',views.RoleApiView.as_view(),name="Role"),
     path('Roles/<int:Roles>',views.roledetailView.as_view(),name="Role Detail View"),
@@ -66,6 +66,8 @@ urlpatterns = [
     path('Jobs/',views.JobApiView.as_view(),name="Job"),
     path('Jobs/<int:Jobs>',views.jobdetailView.as_view(),name="Job Detail View"),
     path('Jobs/get_jobs_by_job_position',get_jobs_by_job_position,name="Jobs Detail Detail by  Using Job Position"),
+  
+    
     
     path('job_categorys/',views.JobCategoryApiView.as_view(),name="Job Category"),
     path('job_categorys/<int:job_categorys>',views.job_categorydetailView.as_view(),name="Job Category Detail View"),
@@ -81,6 +83,7 @@ urlpatterns = [
     path('Applicant_Documents/<int:Applicant_Documents>',views.Applicant_DocumentdetailView.as_view(),name="Applicant(GET)"),
     #get Appliccant Document by using Certaim Parameter
     path('Applicant_Documents/get-by_user_id',usered,name="Applicant Detail View"),
+
 
     
     path('candidate_Evaluations/',views.Candidate_EvaluationApiView.as_view(),name="Candidate Evaluation"),

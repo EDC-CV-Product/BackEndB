@@ -33,6 +33,15 @@ class UserApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+# Delete User Using user_id
+    def delete(self, request):
+            queryset=user.objects.get(id=request.data['id'])
+            print(queryset)
+            if queryset:
+                    queryset.delete()
+                    return Response({"Message":"Success"}, status=status.HTTP_200_OK)
+            else:
+                    return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)
 # function to update the detail of the data found in the database
     def put(self, request):
         queryset = user.objects.get(id=request.data['id'])
@@ -70,11 +79,13 @@ def get_user_by_email(request):
 # API for User Role Starts Here
 
 class UserRoleApiView(APIView):
+
     serializer_class=UserRoleSerializer
     def get(self,request):
-        User_Roles=User_Role.objects.all().values()
-        return Response({"Message":"Success","data":User_Roles})
-
+        queryset=User_Role.objects.all()
+        user_role_ser = UserRoleSerializer(queryset, many=True)
+        return Response({"Message":"Success","data":user_role_ser.data})
+   
 # to Create Form and POST data to Table
     def post(self, request):
         serializer_obj = UserRoleSerializer(data=request.data)
@@ -101,7 +112,7 @@ class UserRoleApiView(APIView):
 
     #Delete User role Using User ID
     def delete(self, request):
-            queryset=User_Role.objects.filter(user=request.data['user_id'])
+            queryset=User_Role.objects.filter(user_role_id=request.data['user_id'])
             print(queryset)
             if queryset:
                     queryset.delete()
@@ -429,6 +440,15 @@ class JobApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
+# deleting Job Using User_ID
+    def delete_Job(self, request):
+            queryset=Job.objects.filter(job_id=request.data['job_id'])
+            print(queryset)
+            if queryset:
+                    queryset.delete()
+                    return Response({"Message":"Success"}, status=status.HTTP_200_OK)
+            else:
+                    return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)
 
     #update operation on data from database based on the the primary Key
     def put(self, request):
@@ -520,7 +540,15 @@ class ApplicationApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
-
+    #Delete Application Using Using User ID
+    def delete_Application(self, request):
+            queryset=Application.objects.filter(application_id=request.data['user_id'])
+            print(queryset)
+            if queryset:
+                    queryset.delete()
+                    return Response({"Message":"Success"}, status=status.HTTP_200_OK)
+            else:
+                    return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)
      #update operation on data from database based on the the primary Key
     def put(self, request):
         queryset = Application.objects.get(application_id=request.data['application_id'])
@@ -532,14 +560,8 @@ class ApplicationApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
+# Deleting Applications using User ID
 
-# to delete Aspesfic Object from the given model
-def delete(self, request, id, format=None):
-        user = application.objects.get(id=id)
-        if user:
-            user.delete()
-            return Response({"status":"ok"}, status=status.HTTP_200_OK)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # API used to retrive User Detail Using UserId Only
 class ApplicationdetailView(APIView):
@@ -582,7 +604,15 @@ class Applicant_DocumentApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
-
+    #Delete Application Document Using User ID
+    def dele_app(self, request):
+            queryset=Applicant_Document.objects.filter(applicant_document_id=request.data['user_id'])
+            print(queryset)
+            if queryset:
+                    queryset.delete()
+                    return Response({"Message":"Success"}, status=status.HTTP_200_OK)
+            else:
+                    return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)
       #update operation on data from database based on the the primary Key
     def put(self, request):
         queryset = Applicant_Document.objects.get(applicant_document_id=request.data['applicant_document_id'])
@@ -612,22 +642,6 @@ def usered(request):
             queryset = queryset.filter(user_id=user_id)
         serializer = ApplicatDocumentSerializer(queryset, many=True)
         return Response({'data': serializer.data})
-# Deleting all objectes of Spesfic Model Before puting Data
-def delete(self, request, format=None):
-        users = application.objects.all()
-        if users:
-            users.delete()
-            return Response({"status":"ok"}, status=status.HTTP_200_OK)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# to delete Aspesfic Object from the given model
-def delete(self, request, user_name, format=None):
-        user = application.objects.get(username=user_name)
-        if user:
-            user.delete()
-            return Response({"status":"ok"}, status=status.HTTP_200_OK)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 # API for  candidate_Evaluation Starts Here
 class Candidate_EvaluationApiView(APIView):

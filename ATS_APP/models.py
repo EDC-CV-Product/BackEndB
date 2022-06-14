@@ -97,8 +97,6 @@ class Education(models.Model):
          on_delete=models.CASCADE,
          )
 
-    
-
 class Job(models.Model):
     job_id = models.AutoField(primary_key=True)
     code = models.CharField(max_length=30)
@@ -120,8 +118,6 @@ class Job(models.Model):
     organization_name = models.CharField(max_length=50,default='',null=True)
     file=models.FileField()
  
-  
-   
 class job_category(models.Model):
     job_category_id = models.AutoField(primary_key=True)
     code = models.CharField(max_length=10)
@@ -155,7 +151,6 @@ class Applicant_Document(models.Model):
          on_delete=models.CASCADE,
          )
 
- 
 class candidate_Evaluation(models.Model):
     candidate_evaluation_id = models.AutoField(primary_key=True)
     evaluation_notes = models.CharField(max_length=1000, null=True)
