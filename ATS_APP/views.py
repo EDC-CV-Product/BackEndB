@@ -81,9 +81,9 @@ def search_users(req):
     #if first_name is not None:
      #  first_name=''
     queryset = queryset.filter(Q(first_name__icontains=first_name)
-                               or Q(middle_name__icontains= middle_name)
-                               or Q(middle_name__icontains= last_name ))
-    print('result', queryset)
+                               | Q(middle_name__icontains= middle_name)
+                               | Q(last_name__icontains= last_name ))
+    print('result', len(queryset))
     serializer = UserSerializer(queryset, many=True)
     return Response({'data': serializer.data})
 
