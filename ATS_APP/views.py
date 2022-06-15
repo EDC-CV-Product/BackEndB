@@ -63,6 +63,17 @@ class UserApiView(APIView):
         except Exception as e:
             print(e)
             return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
+@api_view(['GET'])
+def search_users(request):
+    queryset = user.objects.all()
+    first_name = request.query_params.get('first_name',None)
+    middle_name = request.query_params.get('middle_name',None)
+    last_name = request.query_params.get('last_name',None)
+    #if first_name is not None:
+     #  first_name=''
+    queryset = queryset.filter(Q(first_name__icontains=first_name) or Q(middle_name__icontains= middle_name) or Q(middle_name__icontains= last_name ))
+    serializer = UserSerializer(queryset, many=True)
+    return Response({'data': serializer.data})
 
 # API used to retrive User Detail Using User Id Only
 class userdetailView(APIView):

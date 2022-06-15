@@ -32,7 +32,8 @@ urlpatterns = [
     path('users/<int:users>',views.userdetailView.as_view(),name="User search by thier DI"),
     #Url for search query paramter string in the URL
     path('users/by_email',get_user_by_email,name="User Detail Using Email"),
-    #path('users/delete',delete,name="Delete User By User ID"),
+    path('users/search_users',search_users,name="Search User By Names"),
+
 
     path('User_Roles/',views.UserRoleApiView.as_view(),name="User Role"),
     path('User_Roles/<int:User_Roles>',views.userroledetailView.as_view(),name="User Role Detail View"),
