@@ -39,15 +39,17 @@ class UserApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 # Delete User Using user_id
-    def delete(self, request):
-            queryset=user.objects.get(id=request.data['id'])
-            print(queryset)
+    def delete(self, req):
+        id = req.query_params.get('id', None)
+        print(id)
+        if id:
+            queryset = user.objects.filter(id=id)
             if queryset:
-                    queryset.delete()
-                    return Response({"Message":"Success"}, status=status.HTTP_200_OK)
+                queryset.delete()
+                return Response({"Message": "Success"}, status=status.HTTP_200_OK)
             else:
-                    return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)
-# function to update the detail of the data found in the database
+                return Response({"Message": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
+    # function to update the detail of the data found in the database
     def put(self, request):
         queryset = user.objects.get(id=request.data['id'])
         serializer = UserSerializer(queryset, data= request.data)
@@ -557,14 +559,16 @@ class ApplicationApiView(APIView):
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 
     #Delete Application Using Using User ID
-    def delete(self, request):
-            queryset=Application.objects.filter(application_id=request.data['user_id'])
-            print(queryset)
+    def delete(self, req):
+        user_id = req.query_params.get('user_id', None)
+        print(user_id)
+        if user_id:
+            queryset = Application.objects.filter(user=user_id)
             if queryset:
-                    queryset.delete()
-                    return Response({"Message":"Success"}, status=status.HTTP_200_OK)
+                queryset.delete()
+                return Response({"Message": "Success"}, status=status.HTTP_200_OK)
             else:
-                    return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)
+                return Response({"Message": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
      #update operation on data from database based on the the primary Key
     def put(self, request):
         queryset = Application.objects.get(application_id=request.data['application_id'])
@@ -621,14 +625,24 @@ class Applicant_DocumentApiView(APIView):
             print(e)
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
     #Delete Application Document Using User ID
-    def delete(self, request):
+    """def delete(self, request):
             queryset=Applicant_Document.objects.filter(applicant_document_id=request.data['user_id'])
             print(queryset)
             if queryset:
                     queryset.delete()
                     return Response({"Message":"Success"}, status=status.HTTP_200_OK)
             else:
-                    return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)
+                    return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)"""
+    def delete(self, req):
+        user_id = req.query_params.get('user_id', None)
+        print(user_id)
+        if user_id:
+            queryset = Applicant_Document.objects.filter(user=user_id)
+            if queryset:
+                queryset.delete()
+                return Response({"Message": "Success"}, status=status.HTTP_200_OK)
+            else:
+                return Response({"Message": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
       #update operation on data from database based on the the primary Key
     def put(self, request):
         queryset = Applicant_Document.objects.get(applicant_document_id=request.data['user_id'])

@@ -100,8 +100,8 @@ WSGI_APPLICATION = 'ATS_Project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-"""
-DATABASES = {
+
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ATS_Project',
@@ -111,9 +111,9 @@ DATABASES = {
         'PORT': 3306,
 
     }
-}
+}"""
 
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
