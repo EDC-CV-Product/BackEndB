@@ -116,14 +116,25 @@ class UserRoleApiView(APIView):
             return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 
     #Delete User role Using User ID
-    def delete(self, request):
+    """def delete(self, request):
             queryset=User_Role.objects.filter(user_role_id=request.data['user_id'])
             print(queryset)
             if queryset:
                     queryset.delete()
                     return Response({"Message":"Success"}, status=status.HTTP_200_OK)
             else:
-                    return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)
+                    return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)"""
+        # Delete User role Using User ID
+    def delete(self, req):
+        user_id = req.query_params.get('user_id', None)
+        print(user_id)
+        if user_id:
+            queryset = User_Role.objects.filter(user=user_id)
+            if queryset:
+                queryset.delete()
+                return Response({"Message": "Success"}, status=status.HTTP_200_OK)
+            else:
+                return Response({"Message": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
       # return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # API used to retrive User Detail Using User Id Only
