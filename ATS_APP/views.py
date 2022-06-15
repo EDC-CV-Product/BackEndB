@@ -64,14 +64,26 @@ class UserApiView(APIView):
             print(e)
             return Response(serializer.errors, status=status.HHTP_404_NOT_FOUND)
 @api_view(['GET'])
-def search_users(request):
+def search_users(req):
     queryset = user.objects.all()
-    first_name = request.query_params.get('first_name',None)
-    middle_name = request.query_params.get('middle_name',None)
-    last_name = request.query_params.get('last_name',None)
+    first_name = ''
+    middle_name = ''
+    last_name = ''
+    first_name_q = req.query_params.get('first_name',None)
+    if first_name_q:
+        first_name=first_name_q
+    middle_name_q = req.query_params.get('middle_name',None)
+    if middle_name_q:
+        middle_name=middle_name_q
+    last_name_q = req.query_params.get('last_name',None)
+    if last_name_q:
+        last_name=last_name_q
     #if first_name is not None:
      #  first_name=''
-    queryset = queryset.filter(Q(first_name__icontains=first_name) or Q(middle_name__icontains= middle_name) or Q(middle_name__icontains= last_name ))
+    queryset = queryset.filter(Q(first_name__icontains=first_name)
+                               or Q(middle_name__icontains= middle_name)
+                               or Q(middle_name__icontains= last_name ))
+    print('result', queryset)
     serializer = UserSerializer(queryset, many=True)
     return Response({'data': serializer.data})
 
