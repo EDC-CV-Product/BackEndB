@@ -483,13 +483,14 @@ class JobApiView(APIView):
             return Response(serializer_obj.errors, status.HTTP_404_NOT_FOUND)
 # deleting Job Using User_ID
     def delete(self, request):
-            queryset=Job.objects.filter(job_id=request.data['job_id'])
-            print(queryset)
+        job_id = request.query_params.get('job_id', None)
+        if job_id:
+            queryset = Job.objects.filter(job_id=job_id)
             if queryset:
-                    queryset.delete()
-                    return Response({"Message":"Success"}, status=status.HTTP_200_OK)
+                queryset.delete()
+                return Response({"Message": "Success"}, status=status.HTTP_200_OK)
             else:
-                    return Response({"Message":"Not Found"}, status=status.HTTP_404_NOT_FOUND)
+                return Response({"Message": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
 
     #update operation on data from database based on the the primary Key
     def put(self, request):
