@@ -283,14 +283,19 @@ class candidate_EvaluationSerializer(serializers.ModelSerializer):
         model =candidate_Evaluation
         fields='__all__'
   
-
-   
+  
 class candidate_EvaluationSerializer(serializers.ModelSerializer):
+    candidate_user = userdetailSerializer()
+    class Meta:
+        model = candidate_Evaluation
+        fields='__all__'
+   
+"""class candidate_EvaluationSerializer(serializers.ModelSerializer):
  
 
     class Meta:
         model = candidate_Evaluation
-        fields='__all__'
+        fields='__all__'"""
 
 
 # Job_Discription Starts Here
