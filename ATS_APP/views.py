@@ -810,10 +810,10 @@ def get_applicant_score(request):
                 # user_file_ext = os.path.splitext(user_file.name)[-1].lower()
                 if user_file:
                     print('Yes user file')
-                    job_file_path = settings.BASE_DIR.replace('\\', '/') + job_file.replace('applicant-file', 'CV_ROOT')
+                    job_file_path = str(settings.BASE_DIR).replace('\\', '/') + str(job_file).replace('applicant-file', 'CV_ROOT')
                     print('job_file_path', job_file_path)
 
-                    user_file_path = settings.BASE_DIR.replace('\\', '/') + user_file.replace('applicant-file', 'CV_ROOT')
+                    user_file_path = str(settings.BASE_DIR).replace('\\', '/') + str(user_file).replace('applicant-file', 'CV_ROOT')
                     print('user_file_path: ' + user_file_path)
                     print('job_file_path: ' + job_file_path)
                     # return Response({'jobfile': job_file_path, 'userfile': user_file_path}

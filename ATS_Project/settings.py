@@ -111,9 +111,9 @@ WSGI_APPLICATION = 'ATS_Project.wsgi.application'
         'PORT': 3306,
 
     }
-}"""
+}
 
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
