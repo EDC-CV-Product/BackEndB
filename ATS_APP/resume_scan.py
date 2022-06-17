@@ -4,6 +4,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
 from nltk.corpus import stopwords
+from .import utils
 from nltk.tokenize import word_tokenize
   
 stopwords = set(stopwords.words('english'))
@@ -15,9 +16,15 @@ def score(seg_list01,seg_list02):
         item01 =item01_list.lower().split()
         item01=[word for word in item01 if not word in stopwords]
 
+        item01 = utils.clean_text(item01)
+        item01 = utils.remove_punctuation(item01)
+
         item02_list = re.sub('[^a-zA-Z]',' ',seg_list02)
         item02 =item02_list.lower().split()
         item02=[word2 for word2 in item02 if not word2 in stopwords]
+
+        item02 = utils.clean_text(item02)
+        item02 = utils.remove_punctuation(item02)
 
         documents = [item01, item02]
 

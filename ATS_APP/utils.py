@@ -169,7 +169,7 @@ def extract_text(file_path):
 
     if extension == '.pdf':
         for page in read_pdf_resume(file_path):
-            text += ' ' + page
+            text += page
     elif extension == '.docx' or extension == '.doc':
         text = extract_text_from_doc(file_path)
     else:
