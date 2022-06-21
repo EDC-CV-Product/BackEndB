@@ -1,1 +1,3 @@
 stopwords
+pip uninstall pdfminer.six
+pip install pdfminer.six

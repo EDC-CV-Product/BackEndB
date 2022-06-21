@@ -283,7 +283,7 @@ class candidate_EvaluationSerializer(serializers.ModelSerializer):
         model =candidate_Evaluation
         fields='__all__'
   
-  
+
 class candidate_EvaluationSerializer(serializers.ModelSerializer):
     candidate_user = userdetailSerializer()
     class Meta:
@@ -291,8 +291,6 @@ class candidate_EvaluationSerializer(serializers.ModelSerializer):
         fields='__all__'
    
 """class candidate_EvaluationSerializer(serializers.ModelSerializer):
- 
-
     class Meta:
         model = candidate_Evaluation
         fields='__all__'"""
